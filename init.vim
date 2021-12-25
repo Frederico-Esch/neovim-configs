@@ -1,4 +1,4 @@
-syntax on
+syntax on "teste
 set tabstop=4 softtabstop=4
 set expandtab
 set shiftwidth=4
