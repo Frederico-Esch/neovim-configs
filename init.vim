@@ -40,7 +40,7 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
 Plug 'OmniSharp/omnisharp-vim'
-Plug 'dense-analysis/ale'
+"Plug 'dense-analysis/ale'
 
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -81,3 +81,7 @@ nnoremap <S-TAB> :bnext<CR>
 nnoremap <S-w> :bd<CR>
 nnoremap <M-p> :Telescope find_files<CR>
 nnoremap <M-b> :Telescope buffers<CR>
+
+" That should work to change C-n and C-p to tab and S-tab
+  inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
