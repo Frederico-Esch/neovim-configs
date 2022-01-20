@@ -76,6 +76,7 @@ let g:coc_global_extensions = [
             \ 'coc-emmet' ,
             \ 'coc-flutter' ,
             \ 'coc-json' ,
+            \ 'coc-omnisharp'
             \ ]
 
 " keymaps
@@ -102,3 +103,5 @@ inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 "like the above this is supposed to fix documentations scroll in coc.vim
 inoremap <nowait><silent><expr> <down> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<down>"
 inoremap <nowait><silent><expr>  <up>  coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" :  "\<up>"
+
+"Sim to guardando um link aqui -> https://www.youtube.com/watch?v=TZF46oPBHPc
