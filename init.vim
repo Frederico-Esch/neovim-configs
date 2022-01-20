@@ -24,7 +24,8 @@ set termguicolors
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'gruvbox-community/gruvbox'
-Plug 'vim-utils/vim-man'
+"Plug 'paretje/nvim-man'
+"Plug 'vim-utils/vim-man'
 Plug 'wadackel/vim-dogrun'
 Plug 'sjl/badwolf'
 Plug 'tyrannicaltoucan/vim-deep-space'
@@ -65,6 +66,18 @@ let g:airline_theme = 'luna'
 set showtabline=2
 let g:airline#extensions#tabline#show_buffers = 1
 
+" coc-configs
+let g:coc_global_extensions = [
+            \ 'coc-python' ,
+            \ 'coc-tsserver' ,
+            \ 'coc-tslint-plugin' ,
+            \ 'coc-eslint' ,
+            \ 'coc-yaml' ,
+            \ 'coc-emmet' ,
+            \ 'coc-flutter' ,
+            \ 'coc-json' ,
+            \ ]
+
 " keymaps
 nnoremap <silent><M-h> :vertical resize +2<CR>
 nnoremap <silent><M-l> :vertical resize -2<CR>
@@ -83,5 +96,9 @@ nnoremap <M-p> :Telescope find_files<CR>
 nnoremap <M-b> :Telescope buffers<CR>
 
 " That should work to change C-n and C-p to tab and S-tab
-  inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+
+"like the above this is supposed to fix documentations scroll in coc.vim
+inoremap <nowait><silent><expr> <down> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<down>"
+inoremap <nowait><silent><expr>  <up>  coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" :  "\<up>"
