@@ -4,6 +4,10 @@ syntax on
 call plug#begin("/home/frederico/.config/nvim/plugged")
 
 Plug 'sjl/badwolf'
+Plug 'tyrannicaltoucan/vim-deep-space'
+Plug 'kyoz/purify', {'rtp':'vim'}
+Plug 'wadackel/vim-dogrun'
+
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
@@ -24,8 +28,9 @@ Plug 'kyazdani42/nvim-web-devicons'
 
 call plug#end()
 
-colorscheme badwolf  
+"colorscheme deep-space
 
 lua <<EOF
 	require("init")
 EOF
+

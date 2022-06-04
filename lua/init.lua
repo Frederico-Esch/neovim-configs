@@ -1,27 +1,27 @@
 local remap = vim.api.nvim_set_keymap
 
 --settings
-vim.o.tabstop       = 4
-vim.o.softtabstop   = 4
-vim.o.expandtab     = true
-vim.o.shiftwidth    = 4
-vim.o.smartindent   = true
-vim.o.rnu           = true
-vim.o.nu            = true
-vim.o.hlsearch      = false
-vim.g.errorbells    = false
-vim.o.wrap          = false
-vim.o.swapfile      = false
-vim.o.backup        = false
-vim.o.undodir       = "/home/frederico/.config/nvim/undodir"
-vim.o.undofile      = true
-vim.o.incsearch     = true
-vim.o.scrolloff     = 8
-vim.g.signcolumn    = true
-vim.g.clipboard     = "unnamedplus"
-vim.g.ruler         = true
-vim.g.laststatus    = 0
-vim.g.termguicolors = true
+vim.o.tabstop         = 4
+vim.o.softtabstop     = 4
+vim.o.expandtab       = true
+vim.o.shiftwidth      = 4
+vim.o.smartindent     = true
+vim.o.rnu             = true
+vim.o.nu              = true
+vim.o.hlsearch        = false
+vim.g.errorbells      = false
+vim.o.wrap            = false
+vim.o.swapfile        = false
+vim.o.backup          = false
+vim.o.undodir         = "/home/frederico/.config/nvim/undodir"
+vim.o.undofile        = true
+vim.o.incsearch       = true
+vim.o.scrolloff       = 8
+vim.g.signcolumn      = true
+vim.g.clipboard       = "unnamedplus"
+vim.g.ruler           = true
+vim.g.laststatus      = 0
+vim.opt.termguicolors = true
 
 --remaps
 remap("n","<M-c>", "<C-v>", {noremap = true}) 
@@ -50,8 +50,17 @@ remap("n", "<S-t>", ":terminal<CR>", {noremap = true, silent = true})
 vim.g["airline#extensions#tabline#enabled"] = 1
 vim.g["airline_powerline_fonts"] = 1
 vim.g["airline#extensions#tabline#formatter"] = "unique_tail"
-vim.g["airline_theme"] = "badwolf"
+--vim.g["airline_theme"] = "badwolf"
 vim.g["airline#extensions#tabline#show_buffers"] = 1
+
+--themes
+-- vim        | airlines
+-- badwolf    | badwolf, base16_colors
+-- deep-space | ayu_mirage
+-- dogrun     | angr, kolor
+-- purify     | angr
+vim.cmd("colorscheme dogrun")
+vim.g["airline_theme"] = "kolor"
 
 --Lsp
 remap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", {noremap=true, silent = false})
