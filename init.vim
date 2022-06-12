@@ -26,6 +26,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'kyazdani42/nvim-web-devicons'
 
+Plug 'ziglang/zig.vim'
 call plug#end()
 
 "colorscheme deep-space

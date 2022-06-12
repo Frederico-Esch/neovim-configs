@@ -59,8 +59,8 @@ vim.g["airline#extensions#tabline#show_buffers"] = 1
 -- deep-space | ayu_mirage
 -- dogrun     | angr, kolor
 -- purify     | angr
-vim.cmd("colorscheme dogrun")
-vim.g["airline_theme"] = "kolor"
+vim.cmd("colorscheme badwolf")
+vim.g["airline_theme"] = "badwolf"
 
 --Lsp
 remap("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", {noremap=true, silent = false})
@@ -94,7 +94,7 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<Space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 end
 
-local servers = {'clangd', 'rust_analyzer'}
+local servers = {'clangd', 'rust_analyzer', 'pylsp', 'pyright', 'zls'}
 
 for _, lsp in pairs(servers) do
     require('lspconfig')[lsp].setup {
