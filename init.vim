@@ -7,6 +7,7 @@ Plug 'sjl/badwolf'
 Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'kyoz/purify', {'rtp':'vim'}
 Plug 'wadackel/vim-dogrun'
+Plug 'dracula/vim'
 
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
@@ -27,11 +28,18 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'kyazdani42/nvim-web-devicons'
 
 Plug 'ziglang/zig.vim'
+
+Plug 'tommcdo/vim-lion'
+Plug 'tpope/vim-surround'
+Plug 'voldikss/vim-floaterm'
+
+Plug 'onsails/lspkind.nvim'
+
 call plug#end()
 
 "colorscheme deep-space
 
 lua <<EOF
-	require("init")
+	require("init") -- ~/.config/nvim/lua/init.lua
 EOF
 
