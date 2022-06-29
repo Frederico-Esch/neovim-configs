@@ -92,29 +92,39 @@ local on_attach = function(client, bufnr)
     -- See ":help vim.lsp.*" for documentation on any of the below functions
     remapb(bufnr, "n", "<Space>e",  "<cmd>lua vim.diagnostic.open_float()<CR>",  nrnso)
     remapb(bufnr, "n", "gd",        "<cmd>lua vim.lsp.buf.definition()<CR>",     nrnso)
+    remapb(bufnr, "n", "gr",        "<cmd>lua vim.lsp.buf.references()<CR>",     nrnso)
     remapb(bufnr, "n", "K",         "<cmd>lua vim.lsp.buf.hover()<CR>",          nrnso)
-    remapb(bufnr, "n", "<C-k>",     "<cmd>lua vim.lsp.buf.signature_help()<CR>", nrnso)
+    remapb(bufnr, "n", "<Space>s",  "<cmd>lua vim.lsp.buf.signature_help()<CR>", nrnso)
     remapb(bufnr, "n", "<Space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>",         nrnso)
     remapb(bufnr, "n", "<Space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>",    nrnso)
-    remapb(bufnr, "n", "gr",        "<cmd>lua vim.lsp.buf.references()<CR>",     nrnso)
     remapb(bufnr, "n", "<Space>f",  "<cmd>lua vim.lsp.buf.formatting()<CR>",     nrnso)
 end
 
-local servers = {"clangd", "pylsp", "pyright", "rust_analyzer", "zls"}
+local servers = {"clangd", "pylsp", "pyright", "rust_analyzer", "zls", "hls"}
 
 for _, lsp in pairs(servers) do
 
     -- Boilerplate for completion
     local cmp = require'cmp'
+    local lspkind = require'lspkind'
+
     cmp.setup({
         snippet = {
             expand = function(args)
                 vim.fn["vsnip#anonymous"](args.body)
             end,
         },
+        formatting = {
+            format = lspkind.cmp_format({
+                mod = "symbol_text"
+            })
+        },
         window = {
             --completion = cmp.config.window.bordered(),
             --documentation = cmp.config.window.bordered(),
+        },
+        experimental = {
+            ghost_text = true
         },
         mapping = cmp.mapping.preset.insert({
             ["<C-b>"] = cmp.mapping.scroll_docs(-4),
