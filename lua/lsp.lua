@@ -12,11 +12,11 @@ local on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<Space>s', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<Space>ne', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<Space>pe', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<Space>ne', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<Space>pe', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<Space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<Space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<Space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<Space>f', '<cmd>lua vim.lsp.buf.format({ async = true })<CR>', opts)
 
 
     --build setup for cmake c++
@@ -32,7 +32,15 @@ local on_attach = function(client, bufnr)
             vim.cmd("!cd 'build' && cmake .. && make")
             vim.cmd("!cd build && ./"..vim.g.setup_build)
         else
-            print("Exec :SetupBuild first")
+            print("You should set the project using :SetupBuild first")
+            local lines = {}
+            for line in io.lines("CMakeLists.txt") do
+                lines[#lines + 1] = line
+            end
+            local buildname = string.sub(lines[2], 9, #lines[2] -1)
+            print("Trying to guess the project name reading CMakeLists, found " .. buildname)
+            vim.cmd("!cd 'build' && cmake .. && make")
+            vim.cmd("!cd build && ./"..buildname)
         end
     end, {nargs = 0})
 

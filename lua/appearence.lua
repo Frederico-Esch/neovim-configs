@@ -17,4 +17,4 @@ vim.g["airline#extensions#tabline#show_buffers"] = 1
 -- dogrun     | angr, kolor
 -- purify     | angr
 vim.cmd("colorscheme badwolf")
-vim.g["airline_theme"] = "kolor"
+vim.g["airline_theme"] = "base16_colors"
