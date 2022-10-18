@@ -31,6 +31,8 @@ Plug 'tommcdo/vim-lion'
 Plug 'tpope/vim-surround'
 Plug 'voldikss/vim-floaterm'
 
+Plug 'onsails/lspkind.nvim'
+
 call plug#end()
 
 lua <<EOF
