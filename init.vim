@@ -7,6 +7,8 @@ Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'kyoz/purify', {'rtp':'vim'}
 Plug 'wadackel/vim-dogrun'
 Plug 'dracula/vim'
+Plug 'eemed/sitruuna.vim'
+Plug 'sainnhe/sonokai'
 
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'

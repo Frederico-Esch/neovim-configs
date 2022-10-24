@@ -11,9 +11,9 @@ vim.g["lion_squeeze_spaces"] = 1
 vim.g["floaterm_title"] = "Terminal($1/$2)"
 
 --themes
-vim.g["airline_theme"] = "kolor"
-vim.cmd("colorscheme dracula")
-vim.cmd("hi Normal guibg=0")
+vim.g["airline_theme"] = "raven"
+vim.cmd("colorscheme sitruuna")
+--vim.cmd("hi Normal guibg=none")
 
 --Floaterm
 vim.cmd("hi Floaterm guibg=black")
