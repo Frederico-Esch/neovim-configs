@@ -4,7 +4,7 @@ remap = vim.api.nvim_set_keymap
 require("settings") -- ~/.config/nvim/lua/settings.lua
 
 --remaps
-require("base_remaps") -- ~/.config/nvim/lua/base_remaps.lua
+require("remaps") -- ~/.config/nvim/lua/remaps.lua
 
 
 --remap coc
@@ -18,8 +18,8 @@ require("base_remaps") -- ~/.config/nvim/lua/base_remaps.lua
 --autocmd
 require("autocmd") -- ~/.config/nvim/lua/autocmd.lua
 
---appearence
-require("appearence") -- ~/.config/nvim/lua/appearence.lua
+--appearance
+require("appearance") -- ~/.config/nvim/lua/appearance.lua
 
 --treesitter
 require'nvim-treesitter.configs'.setup {

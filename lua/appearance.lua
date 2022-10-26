@@ -3,6 +3,8 @@ vim.g["lion_squeeze_spaces"] = 1
 
 --Floaterm
 vim.g["floaterm_title"] = "Terminal($1/$2)"
+vim.cmd("hi Floaterm guibg=black")
+vim.g.floaterm_position = 'bottomright'
 
 --airlines
 vim.g["airline#extensions#tabline#enabled"] = 1
