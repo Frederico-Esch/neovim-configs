@@ -1,7 +1,6 @@
 local on_attach = function(client, bufnr)
 
     local map = vim.keymap.set
-    local adapt = function(str) return vim.api.nvim_replace_termcodes(str, true, true, true) end
 
     --Enables completion triggered by <c-x><c-o>
     vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
@@ -43,20 +42,19 @@ local on_attach = function(client, bufnr)
         end
     end, {nargs = 0})
 
-
     --snippet tab correction
     local tab_action = function()
-        if vim.fn["vsnip#jumpable"](1) == 1 then return adapt('<plug>(vsnip-jump-next)')
-        else return adapt('<tab>') end
+        if vim.fn["vsnip#jumpable"](1) == 1 then return "<plug>(vsnip-jump-next)"
+        else return "<tab>" end
     end
-    map({ 'i', 's' }, '<tab>', tab_action, { expr = true, remap = true })
+    map({ 'i', 's' }, '<tab>', tab_action, { expr = true, remap = false })
 
 
     local shift_tab_action = function()
-        if vim.fn["vsnip#jumpable"](-1) == 1 then return adapt('<plug>(vsnip-jump-prev)')
-        else return adapt("<C-h>") end
+        if vim.fn["vsnip#jumpable"](-1) == 1 then return '<plug>(vsnip-jump-prev)'
+        else return "<C-h>" end
     end
-    map({ 'i', 's' }, '<s-tab>', shift_tab_action, { expr = true, remap = true })
+    map({ 'i', 's' }, '<s-tab>', shift_tab_action, { expr = true, remap = false })
 
 end
 
