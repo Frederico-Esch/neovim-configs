@@ -14,7 +14,7 @@ local on_attach = function(client, bufnr)
     remapb(bufnr, "n", "<Space>e",  "<cmd>lua vim.diagnostic.open_float()<CR>",    nrnso)
     remapb(bufnr, "n", "<Space>rn", "<cmd>lua vim.lsp.buf.rename()<CR>",           nrnso)
     remapb(bufnr, "n", "<Space>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>",      nrnso)
-    remapb(bufnr, "n", "<Space>f",  "<cmd>lua vim.lsp.buf.formatting()<CR>",       nrnso)
+    remapb(bufnr, "n", "<Space>f",  "<cmd>lua vim.lsp.buf.format()<CR>",       nrnso)
     remapb(bufnr, "n", "<Space>s",  "<cmd>lua vim.lsp.buf.signature_help()<CR>",   nrnso)
     remapb(bufnr, "n", "<Space>pe", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", nrnso)
     remapb(bufnr, "n", "<Space>ne", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", nrnso)
@@ -58,7 +58,7 @@ local on_attach = function(client, bufnr)
 
 end
 
-local servers   = {"clangd", "pylsp", "pyright", "rust_analyzer", "zls"}
+local servers   = {"clangd", "pylsp", "pyright", "rust_analyzer", "zls", "fortls"}
 
 local cmp       = require'cmp'
 local lspconfig = require'lspconfig'
