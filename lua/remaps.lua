@@ -1,4 +1,4 @@
---remap("n", "<M-c>", "<C-v>", nro)
+remap("n", "<M-c>", "<C-v>", nro)
 remap("n", "<S-w>", ":bd<CR>", nrnso)
 remap("n", "<S-TAB>", ":bn<CR>", so)
 

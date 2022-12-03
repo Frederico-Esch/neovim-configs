@@ -58,7 +58,7 @@ local on_attach = function(client, bufnr)
 
 end
 
-local servers   = {"clangd", "pylsp", "pyright", "rust_analyzer", "zls", "fortls", "ols"}
+local servers   = {"clangd", "pylsp", "pyright", "rust_analyzer", "zls", "fortls"}
 
 local cmp       = require'cmp'
 local lspconfig = require'lspconfig'
