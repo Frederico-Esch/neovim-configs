@@ -28,6 +28,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'kyazdani42/nvim-web-devicons'
 
 Plug 'ziglang/zig.vim'
+Plug 'Tetralux/odin.vim'
 
 Plug 'tommcdo/vim-lion'
 Plug 'tpope/vim-surround'
