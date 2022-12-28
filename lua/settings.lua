@@ -12,10 +12,13 @@ vim.o.backup          = false
 vim.o.undodir         = "C:\\Users\\fepfr\\AppData\\Local\\nvim\\undodir"
 vim.o.undofile        = true
 vim.o.incsearch       = true
+vim.o.smartcase       = true
+vim.o.ignorecase      = true
 vim.o.scrolloff       = 8
 vim.g.errorbells      = false
 vim.g.laststatus      = 0
 vim.opt.termguicolors = true
+vim.g.smartcase       = true
 
 vim.o.list            = true
 vim.o.listchars       = "tab:➤ ,lead:·,trail:♥"

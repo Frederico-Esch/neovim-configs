@@ -30,6 +30,7 @@ require("packer").startup(
         use 'tpope/vim-surround'
         use 'voldikss/vim-floaterm'
         use 'tpope/vim-fugitive'
+        use 'mbbill/undotree'
 
         use 'neovim/nvim-lspconfig'
         use 'hrsh7th/cmp-nvim-lsp'
