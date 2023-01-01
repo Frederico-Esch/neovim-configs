@@ -43,21 +43,5 @@ require("packer").startup(
         use 'hrsh7th/vim-vsnip'
         use 'hrsh7th/cmp-nvim-lsp-signature-help'
         use 'onsails/lspkind.nvim'
-
-        use {
-            'KadoBOT/nvim-spotify', 
-            requires = 'nvim-telescope/telescope.nvim',
-            config = function()
-                local spotify = require'nvim-spotify'
-
-                spotify.setup {
-                    status = {
-                        update_interval = 30000, -- the interval (ms) to check for what's currently playing
-                        format = '%s %t by %a' -- spotify-tui --format argument
-                    }
-                }
-            end,
-            run = 'make'
-        }
     end
 )
