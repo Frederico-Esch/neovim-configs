@@ -19,9 +19,13 @@ require("packer").startup(
             requires = {{ 'nvim-lua/plenary.nvim' }, { 'kyazdani42/nvim-web-devicons' }}
         }
 
+        --use {
+        --    'vim-airline/vim-airline',
+        --    requires = {{'kyazdani42/nvim-web-devicons'}, {'vim-airline/vim-airline-themes'}}
+        --}
         use {
-            'vim-airline/vim-airline',
-            requires = {{'kyazdani42/nvim-web-devicons'}, {'vim-airline/vim-airline-themes'}}
+          'nvim-lualine/lualine.nvim',
+          requires = { 'kyazdani42/nvim-web-devicons', opt = true }
         }
 
         use 'nvim-treesitter/nvim-treesitter'
@@ -39,5 +43,21 @@ require("packer").startup(
         use 'hrsh7th/vim-vsnip'
         use 'hrsh7th/cmp-nvim-lsp-signature-help'
         use 'onsails/lspkind.nvim'
+
+        use {
+            'KadoBOT/nvim-spotify', 
+            requires = 'nvim-telescope/telescope.nvim',
+            config = function()
+                local spotify = require'nvim-spotify'
+
+                spotify.setup {
+                    status = {
+                        update_interval = 30000, -- the interval (ms) to check for what's currently playing
+                        format = '%s %t by %a' -- spotify-tui --format argument
+                    }
+                }
+            end,
+            run = 'make'
+        }
     end
 )
