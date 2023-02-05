@@ -66,7 +66,7 @@ local telescope_colors = {
     },
 }
 
-local theme = [[dracula]]
+local theme = [[badwolf]]
 
 --vim.opt.bg = "dark"
 vim.g["lion_squeeze_spaces"] = 1

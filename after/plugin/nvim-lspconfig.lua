@@ -82,13 +82,23 @@ cmp.setup({
 
 for _, lsp in pairs(servers) do
 
-    lspconfig[lsp].setup {
-        on_attach = on_attach,
-        flags = {
-            debounce_text_changes = 150,
-        },
-        capabilities = capabilities
-    }
-
+    if lsp == "clangd" then
+        lspconfig[lsp].setup {
+            on_attach = on_attach,
+            cmd = { "clangd", "--header-insertion=never"},
+            flags = {
+                debounce_text_changes = 150,
+            },
+            capabilities = capabilities
+        }
+    else
+        lspconfig[lsp].setup {
+            on_attach = on_attach,
+            flags = {
+                debounce_text_changes = 150,
+            },
+            capabilities = capabilities
+        }
+    end
 end
 
