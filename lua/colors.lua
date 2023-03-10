@@ -66,7 +66,10 @@ local telescope_colors = {
     },
 }
 
-local theme = [[badwolf]]
+local theme = {
+    Neovim = [[badwolf]],
+    LuaLine = [[powerline_dark]]
+}
 
 --vim.opt.bg = "dark"
 vim.g["lion_squeeze_spaces"] = 1

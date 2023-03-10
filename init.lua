@@ -6,4 +6,4 @@ require("my_commands")
 colors, telescope_colors, theme = require("colors").get_colors()
 
 
-vim.cmd.colorscheme(theme)
+vim.cmd.colorscheme(theme.Neovim)
