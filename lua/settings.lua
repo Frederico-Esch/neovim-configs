@@ -21,6 +21,8 @@ vim.g.laststatus      = 0
 vim.opt.termguicolors = true
 vim.g.mouse           = ""
 vim.o.formatoptions   = ""
+vim.o.ignorecase      = true
+vim.o.smartcase       = true
 
 
 vim.o.list            = true
