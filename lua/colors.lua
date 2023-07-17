@@ -67,7 +67,7 @@ local telescope_colors = {
 }
 
 local theme = {
-    Neovim = [[badwolf]],
+    Neovim = [[badwolf]], --sitruuna
     LuaLine = [[powerline_dark]]
 }
 
