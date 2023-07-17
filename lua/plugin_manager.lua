@@ -43,5 +43,7 @@ require("packer").startup(
         use 'hrsh7th/vim-vsnip'
         use 'hrsh7th/cmp-nvim-lsp-signature-help'
         use 'onsails/lspkind.nvim'
+
+        use 'ziglang/zig.vim'
     end
 )
