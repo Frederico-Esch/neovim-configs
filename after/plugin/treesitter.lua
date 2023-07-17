@@ -6,7 +6,7 @@ require'nvim-treesitter.configs'.setup {
         "rust",
         "toml",
         "zig",
-        "python",
+        --"python",
         "haskell",
         "json",
         "yaml",
