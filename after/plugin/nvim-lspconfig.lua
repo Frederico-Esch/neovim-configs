@@ -3,7 +3,7 @@ local lspconfig = require'lspconfig'
 local lspkind   = require'lspkind'
 local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-local servers = {"clangd", "pylsp", "pyright", "rust_analyzer", "hls", "gopls"} --"zls", "fortls", "ols", 
+local servers = {"clangd", "rust_analyzer", "hls", "gopls"} --"zls", "fortls", "ols", 
 
 local snippet_config = {
     expand = function(args) vim.fn["vsnip#anonymous"](args.body) end
@@ -85,7 +85,7 @@ for _, lsp in pairs(servers) do
     if lsp == "clangd" then
         lspconfig[lsp].setup {
             on_attach = on_attach,
-            cmd = { "clangd", "--header-insertion=never"},
+            cmd = { "clangd", "--header-insertion=never", "--query-driver=C:/Users/frede/.platformio/packages/toolchain-xtensa-esp32/bin/xtensa-esp32-elf-gcc.exe" },
             flags = {
                 debounce_text_changes = 150,
             },

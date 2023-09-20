@@ -10,6 +10,8 @@ require("packer").startup(
         use 'wadackel/vim-dogrun'
         use 'dracula/vim'
         use 'eemed/sitruuna.vim'
+        use 'jaredgorski/SpaceCamp'
+        use 'hachy/eva01.vim'
 
 
         use 'nvim-lua/popup.nvim'

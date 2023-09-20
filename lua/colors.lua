@@ -67,8 +67,8 @@ local telescope_colors = {
 }
 
 local theme = {
-    Neovim = [[badwolf]], --sitruuna
-    LuaLine = [[powerline_dark]]
+    Neovim = [[eva01]], --badwolf sitruuna
+    LuaLine = [[powerline]] --powerline_dark
 }
 
 --vim.opt.bg = "dark"
