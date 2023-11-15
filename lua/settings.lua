@@ -9,7 +9,6 @@ vim.o.hlsearch        = false
 vim.o.wrap            = false
 vim.o.swapfile        = false
 vim.o.backup          = false
-vim.o.undodir         = "C:\\Users\\frede\\AppData\\Local\\nvim\\undodir"
 vim.o.undofile        = true
 vim.o.incsearch       = true
 vim.o.smartcase       = true
@@ -24,3 +23,9 @@ vim.o.list            = true
 vim.o.listchars       = "tab:➤ ,lead:·,trail:♥"
 
 vim.g.mapleader = " "
+
+if (vim.loop.os_uname().sysname == "Linux") then
+    vim.o.undodir = vim.fn.expand("~") .. "/.config/nvim/undodir"
+else
+    vim.o.undodir = "C:\\Users\\frede\\AppData\\Local\\nvim\\undodir"
+end

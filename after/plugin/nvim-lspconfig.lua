@@ -2,6 +2,7 @@ local cmp       = require'cmp'
 local lspconfig = require'lspconfig'
 local lspkind   = require'lspkind'
 local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+local os = vim.loop.os_uname().sysname
 
 local servers = {"clangd", "rust_analyzer", "hls", "gopls"} --"zls", "fortls", "ols", 
 
@@ -80,17 +81,24 @@ cmp.setup({
     })
 })
 
+
+local clangd_config = {
+    on_attach = on_attach,
+    cmd = { "clangd", "--header-insertion=never" },
+    flags = {
+        debounce_text_changes = 150,
+    },
+    capabilities = capabilities
+}
+
+if (os ~= "Linux") then
+    table.insert(clangd_config.cmd, "--query-driver=C:/Users/frede/.platformio/packages/toolchain-xtensa-esp32/bin/xtensa-esp32-elf-gcc.exe,C:/msys64/mingw64/bin/gcc.exe")
+end
+
 for _, lsp in pairs(servers) do
 
     if lsp == "clangd" then
-        lspconfig[lsp].setup {
-            on_attach = on_attach,
-            cmd = { "clangd", "--header-insertion=never", "--query-driver=C:/Users/frede/.platformio/packages/toolchain-xtensa-esp32/bin/xtensa-esp32-elf-gcc.exe" },
-            flags = {
-                debounce_text_changes = 150,
-            },
-            capabilities = capabilities
-        }
+        lspconfig[lsp].setup(clangd_config)
     else
         lspconfig[lsp].setup {
             on_attach = on_attach,
@@ -101,4 +109,3 @@ for _, lsp in pairs(servers) do
         }
     end
 end
-
