@@ -12,6 +12,7 @@ require("packer").startup(
         use 'eemed/sitruuna.vim'
         use 'jaredgorski/SpaceCamp'
         use 'hachy/eva01.vim'
+        use 'EdenEast/nightfox.nvim'
 
 
         use 'nvim-lua/popup.nvim'
