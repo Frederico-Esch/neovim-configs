@@ -27,5 +27,5 @@ vim.g.mapleader = " "
 if (vim.loop.os_uname().sysname == "Linux") then
     vim.o.undodir = vim.fn.expand("~") .. "/.config/nvim/undodir"
 else
-    vim.o.undodir = "C:\\Users\\frede\\AppData\\Local\\nvim\\undodir"
+    vim.o.undodir = vim.fn.expand("~") .. "\\AppData\\Local\\nvim\\undodir"
 end
