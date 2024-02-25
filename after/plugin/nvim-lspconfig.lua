@@ -18,9 +18,18 @@ local experimental_config = {
     ghost_text = true
 }
 
-function on_attach(client, bufnr)
+local tab_action = function()
+    if vim.fn["vsnip#jumpable"](1) == 1 then return "<plug>(vsnip-jump-next)"
+    else return "<tab>" end
+end
 
-    local remap = vim.keymap.set
+local shift_tab_action = function()
+    if vim.fn["vsnip#jumpable"](-1) == 1 then return "<plug>(vsnip-jump-prev)"
+    else return "<C-h>" end
+end
+
+local remap = vim.keymap.set
+function on_attach(client, bufnr)
     local options = {
         noremap = true,
         silent  = true,
@@ -37,21 +46,11 @@ function on_attach(client, bufnr)
     --remap("n"  , "<leader>s" , "<cmd>lua vim.lsp.buf.signature_help()<CR>" , options)
     --remap("n", "<leader>pe", "<cmd>lua vim.diagnostic.goto_prev()<CR>"   , options)
     --remap("n", "<leader>ne", "<cmd>lua vim.diagnostic.goto_next()<CR>"   , options)
-
-    local tab_action = function()
-        if vim.fn["vsnip#jumpable"](1) == 1 then return "<plug>(vsnip-jump-next)"
-        else return "<tab>" end
-    end
-    remap({ "i", "s" }, "<tab>", tab_action, { expr = true, remap = false })
-
-
-    local shift_tab_action = function()
-        if vim.fn["vsnip#jumpable"](-1) == 1 then return "<plug>(vsnip-jump-prev)"
-        else return "<C-h>" end
-    end
-    remap({ "i", "s" }, "<s-tab>", shift_tab_action, { expr = true, remap = false })
 end
 
+--fixing tab and S-Tab with cmp and vsnip
+remap({ "i", "s" }, "<tab>", tab_action, { expr = true, remap = false })
+remap({ "i", "s" }, "<s-tab>", shift_tab_action, { expr = true, remap = false })
 
 --attach options
 cmp.setup({
