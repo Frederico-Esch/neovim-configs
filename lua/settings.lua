@@ -14,10 +14,11 @@ vim.o.incsearch       = true
 vim.o.smartcase       = true
 vim.o.ignorecase      = true
 vim.o.scrolloff       = 8
+vim.o.showmode        = false
 vim.g.errorbells      = false
 vim.g.laststatus      = 0
-vim.opt.termguicolors = true
 vim.g.smartcase       = true
+vim.opt.termguicolors = true
 
 vim.o.list            = true
 vim.o.listchars       = "tab:➤ ,lead:·,trail:♥"

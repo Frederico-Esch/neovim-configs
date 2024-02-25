@@ -67,8 +67,8 @@ local telescope_colors = {
 }
 
 local theme = {
-    Neovim = [[carbonfox]], --eva01 badwolf sitruuna lunaperche industry ron
-    LuaLine = [[moonfly]] --powerline moonfly powerline_dark
+    Neovim = [[eva01-LCL]], --eva01-LCL badwolf sitruuna lunaperche industry ron carbonfox duskfox nightfox
+    LuaLine = [[powerline_dark]] --powerline moonfly powerline_dark
 }
 
 --vim.opt.bg = "dark"
