@@ -32,9 +32,12 @@ require("packer").startup(
         }
 
         use 'nvim-treesitter/nvim-treesitter'
+        use 'ErichDonGubler/lsp_lines.nvim'
 
         use 'tommcdo/vim-lion'
         use 'tpope/vim-surround'
+        use 'easymotion/vim-easymotion'
+
         use 'voldikss/vim-floaterm'
         use 'tpope/vim-fugitive'
         use 'mbbill/undotree'
