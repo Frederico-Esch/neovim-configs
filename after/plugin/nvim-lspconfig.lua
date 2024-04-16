@@ -4,7 +4,7 @@ local lspkind   = require'lspkind'
 local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local os = vim.loop.os_uname().sysname
 
-local servers = {"clangd", "rust_analyzer", "hls", "gopls"} --"zls", "fortls", "ols", 
+local servers = {"clangd", "rust_analyzer", "hls", "gopls", "ols"} --"zls", "fortls",
 
 local snippet_config = {
     expand = function(args) vim.fn["vsnip#anonymous"](args.body) end
@@ -36,13 +36,25 @@ function on_attach(client, bufnr)
         buffer  = bufnr
     }
 
-    remap("n"  , "gd"        , "<cmd>lua vim.lsp.buf.definition()<CR>"     , options)
-    remap("n"  , "gr"        , "<cmd>lua vim.lsp.buf.references()<CR>"     , options)
-    remap("n"  , "K"         , "<cmd>lua vim.lsp.buf.hover()<CR>"          , options)
-    remap("n"  , "<leader>e" , "<cmd>lua vim.diagnostic.open_float()<CR>"  , options)
-    remap("n"  , "<leader>rn", "<cmd>lua vim.lsp.buf.rename()<CR>"         , options)
-    remap("n"  , "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>"    , options)
-    remap("n"  , "<leader>f" , "<cmd>lua vim.lsp.buf.format()<CR>"         , options)
+    remap("n"  , "gd"        , "<cmd>lua vim.lsp.buf.definition()<CR>"        , options)
+    remap("n"  , "gr"        , "<cmd>lua vim.lsp.buf.references()<CR>"        , options)
+    remap("n"  , "K"         , "<cmd>lua vim.lsp.buf.hover()<CR>"             , options)
+    remap("n"  , "<leader>e" , "<cmd>lua vim.diagnostic.open_float()<CR>"     , options)
+    remap("n"  , "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>"       , options)
+    remap("n"  , "<leader>f" , "<cmd>lua vim.lsp.buf.format()<CR>"            , options)
+    remap("n"  , "<leader>rn",
+        function()
+             vim.api.nvim_create_autocmd({ "CmdlineEnter" }, {
+                callback = function()
+                    local key = vim.api.nvim_replace_termcodes("<C-f>", true, false, true)
+                    vim.api.nvim_feedkeys(key, "c", false)
+                    vim.api.nvim_feedkeys("0", "n", false)
+                    return true
+                end,
+            })
+            vim.lsp.buf.rename()
+        end,
+    options)
     --remap("n"  , "<leader>s" , "<cmd>lua vim.lsp.buf.signature_help()<CR>" , options)
     --remap("n", "<leader>pe", "<cmd>lua vim.diagnostic.goto_prev()<CR>"   , options)
     --remap("n", "<leader>ne", "<cmd>lua vim.diagnostic.goto_next()<CR>"   , options)
