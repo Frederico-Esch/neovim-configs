@@ -4,7 +4,7 @@ local lspkind   = require'lspkind'
 local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 local os = vim.loop.os_uname().sysname
 
-local servers = {"clangd", "rust_analyzer", "hls", "gopls", "ols"} --"zls", "fortls",
+local servers = {"clangd", "rust_analyzer", "hls", "gopls", "ols", "zls"} --, "fortls",
 
 local snippet_config = {
     expand = function(args) vim.fn["vsnip#anonymous"](args.body) end

@@ -29,4 +29,5 @@ if (vim.loop.os_uname().sysname == "Linux") then
     vim.o.undodir = vim.fn.expand("~") .. "/.config/nvim/undodir"
 else
     vim.o.undodir = vim.fn.expand("~") .. "\\AppData\\Local\\nvim\\undodir"
+    vim.g.python3_host_prog = "E:/Aplicativos/python/python.exe"
 end
