@@ -27,6 +27,10 @@ vim.g.mapleader = " "
 
 if (vim.loop.os_uname().sysname == "Linux") then
     vim.o.undodir = vim.fn.expand("~") .. "/.config/nvim/undodir"
+    vim.g.slimv_swank_cmd = "!fish -c 'swank'"
+    vim.g.slimv_lisp = 'ros run'
+    vim.g.slimv_impl = 'sbcl'
+    vim.opt.runtimepath:append('~/.roswell/slimv')
 else
     vim.o.undodir = vim.fn.expand("~") .. "\\AppData\\Local\\nvim\\undodir"
     vim.g.python3_host_prog = "E:/Aplicativos/python/python.exe"
