@@ -14,6 +14,7 @@ require("packer").startup(
         use 'hachy/eva01.vim'
         use 'EdenEast/nightfox.nvim'
 
+        use 'xiyaowong/transparent.nvim'
 
         use 'nvim-lua/popup.nvim'
         use {

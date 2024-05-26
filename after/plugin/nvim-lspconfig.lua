@@ -1,23 +1,21 @@
+--Inclusions
 local cmp       = require'cmp'
 local lspconfig = require'lspconfig'
 local lspkind   = require'lspkind'
-local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
-local os = vim.loop.os_uname().sysname
+local icons     = require'icons'
 
+--Servers
 local servers = {"clangd", "rust_analyzer", "hls", "gopls", "ols", "zls"} --, "fortls",
 
-local snippet_config = {
-    expand = function(args) vim.fn["vsnip#anonymous"](args.body) end
-}
+--Setup
+local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+local snippet_config = { expand = function(args) vim.fn["vsnip#anonymous"](args.body) end }
+local formatting_config = { format = lspkind.cmp_format({ mode = "symbol_text" }) }
+local experimental_config = { ghost_text = true }
+local os = vim.loop.os_uname().sysname
+local remap = vim.keymap.set
 
-local formatting_config = {
-    format = lspkind.cmp_format({ mode = "symbol_text" })
-}
-
-local experimental_config = {
-    ghost_text = true
-}
-
+--Tab fix
 local tab_action = function()
     if vim.fn["vsnip#jumpable"](1) == 1 then return "<plug>(vsnip-jump-next)"
     else return "<tab>" end
@@ -27,8 +25,10 @@ local shift_tab_action = function()
     if vim.fn["vsnip#jumpable"](-1) == 1 then return "<plug>(vsnip-jump-prev)"
     else return "<C-h>" end
 end
+remap({ "i", "s" }, "<tab>", tab_action, { expr = true, remap = false })
+remap({ "i", "s" }, "<s-tab>", shift_tab_action, { expr = true, remap = false })
 
-local remap = vim.keymap.set
+--Attach function
 function on_attach(client, bufnr)
     local options = {
         noremap = true,
@@ -55,16 +55,9 @@ function on_attach(client, bufnr)
             vim.lsp.buf.rename()
         end,
     options)
-    --remap("n"  , "<leader>s" , "<cmd>lua vim.lsp.buf.signature_help()<CR>" , options)
-    --remap("n", "<leader>pe", "<cmd>lua vim.diagnostic.goto_prev()<CR>"   , options)
-    --remap("n", "<leader>ne", "<cmd>lua vim.diagnostic.goto_next()<CR>"   , options)
 end
 
---fixing tab and S-Tab with cmp and vsnip
-remap({ "i", "s" }, "<tab>", tab_action, { expr = true, remap = false })
-remap({ "i", "s" }, "<s-tab>", shift_tab_action, { expr = true, remap = false })
-
---attach options
+--Attach options
 cmp.setup({
     snippet = snippet_config,
     formatting = formatting_config,
@@ -92,20 +85,42 @@ cmp.setup({
     })
 })
 
+--Diagnostics
+local diag_config = {
+    signs = {
+        active = true,
+            values = {
+                { name = "DiagnosticSignError", text = icons.diagnostics.Error       },
+                { name = "DiagnosticSignWarn" , text = icons.diagnostics.Warning     },
+                { name = "DiagnosticSignHint" , text = icons.diagnostics.Hint        },
+                { name = "DiagnosticSignInfo" , text = icons.diagnostics.Information },
+            },
+    },
+}
+vim.diagnostic.config(diag_config)
+for _, sign in ipairs(vim.tbl_get(vim.diagnostic.config(), "signs", "values") or {}) do
+    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
+end
+    --vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+    --vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+    --require("lspconfig.ui.windows").default_options.border = "rounded"
 
+
+--Clang specific config
 local clangd_config = {
     on_attach = on_attach,
-    cmd = { "clangd", "--header-insertion=never" },
+    --cmd = { "clangd", "--header-insertion=never" },
+    cmd = { "clangd" },
     flags = {
         debounce_text_changes = 150,
     },
     capabilities = capabilities
 }
-
 if (os ~= "Linux") then
     table.insert(clangd_config.cmd, "--query-driver=C:/Users/frede/.platformio/packages/toolchain-xtensa-esp32/bin/xtensa-esp32-elf-gcc.exe,C:/msys64/mingw64/bin/gcc.exe")
 end
 
+--Attaching
 for _, lsp in pairs(servers) do
 
     if lsp == "clangd" then
