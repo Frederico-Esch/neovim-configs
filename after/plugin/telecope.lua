@@ -12,6 +12,9 @@ for hl, col in pairs(telescope_colors) do
     vim.api.nvim_set_hl(0, hl, col)
 end
 
+local _, actions = pcall(require, "telescope.actions")
+local custom_mappings = { ["<C-s>"] = actions.send_selected_to_qflist + actions.open_qflist }
+
 require("telescope").setup {
         defaults = {
             vimgrep_arguments = {
@@ -55,6 +58,10 @@ require("telescope").setup {
             file_previewer = require("telescope.previewers").vim_buffer_cat.new,
             grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
             qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
+            mappings = {
+                i = custom_mappings,
+                n = custom_mappings
+            }
     },
     pickers = { find_files = { hidden = true, no_ignore = true } },
     --extensions = { file_browser = { hidden = true } }
