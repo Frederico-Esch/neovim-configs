@@ -3,12 +3,19 @@ local cmp       = require'cmp'
 local lspconfig = require'lspconfig'
 local lspkind   = require'lspkind'
 local icons     = require'icons'
+local ufo       = require'ufo'
 
 --Servers
-local servers = {"clangd", "rust_analyzer", "hls", "gopls", "ols", "zls"} --, "fortls",
+local servers = {"clangd", "rust_analyzer", "hls", "gopls", "ols", "zls"} --, "fortls", "ccls",
 
 --Setup
-local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+local client_capabilities = vim.lsp.protocol.make_client_capabilities()
+client_capabilities.textDocument.foldingRange = {
+    dynamicRegistration = false,
+    lineFoldingOnly = true
+}
+local capabilities = require("cmp_nvim_lsp").default_capabilities(client_capabilities) --BETTER FOLDING
+
 local snippet_config = { expand = function(args) vim.fn["vsnip#anonymous"](args.body) end }
 local formatting_config = { format = lspkind.cmp_format({ mode = "symbol_text" }) }
 local experimental_config = { ghost_text = true }
@@ -38,10 +45,16 @@ function on_attach(client, bufnr)
 
     remap("n"  , "gd"        , "<cmd>lua vim.lsp.buf.definition()<CR>"        , options)
     remap("n"  , "gr"        , "<cmd>lua vim.lsp.buf.references()<CR>"        , options)
-    remap("n"  , "K"         , "<cmd>lua vim.lsp.buf.hover()<CR>"             , options)
     remap("n"  , "<leader>e" , "<cmd>lua vim.diagnostic.open_float()<CR>"     , options)
     remap("n"  , "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>"       , options)
     remap("n"  , "<leader>f" , "<cmd>lua vim.lsp.buf.format()<CR>"            , options)
+    remap("n"  , "K"         ,
+        function()
+            if not ufo.peekFoldedLinesUnderCursor() then
+                vim.lsp.buf.hover()
+            end
+        end,
+    options)
     remap("n"  , "<leader>rn",
         function()
              vim.api.nvim_create_autocmd({ "CmdlineEnter" }, {
@@ -101,12 +114,8 @@ vim.diagnostic.config(diag_config)
 for _, sign in ipairs(vim.tbl_get(vim.diagnostic.config(), "signs", "values") or {}) do
     vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
 end
-    --vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-    --vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
-    --require("lspconfig.ui.windows").default_options.border = "rounded"
 
-
---Clang specific config
+--Clang and CCLS specific config
 local clangd_config = {
     on_attach = on_attach,
     --cmd = { "clangd", "--header-insertion=never" },
@@ -116,15 +125,26 @@ local clangd_config = {
     },
     capabilities = capabilities
 }
-if (os ~= "Linux") then
-    table.insert(clangd_config.cmd, "--query-driver=C:/Users/frede/.platformio/packages/toolchain-xtensa-esp32/bin/xtensa-esp32-elf-gcc.exe,C:/msys64/mingw64/bin/gcc.exe")
-end
+table.insert(clangd_config.cmd, "--query-driver=**")
+
+--callback when ccls attaches (platformio development)
+
+vim.api.nvim_create_autocmd("LspAttach", {
+    callback = function(ev)
+        local client = vim.lsp.get_client_by_id(ev.data.client_id).name
+        if client == "ccls" then
+            vim.cmd[[LspStop 1 (clangd)]]
+        end
+    end
+})
 
 --Attaching
 for _, lsp in pairs(servers) do
 
     if lsp == "clangd" then
         lspconfig[lsp].setup(clangd_config)
+    elseif lsp == "ccls" then
+        lspconfig[lsp].setup(ccls_config)
     else
         lspconfig[lsp].setup {
             on_attach = on_attach,
@@ -135,3 +155,40 @@ for _, lsp in pairs(servers) do
         }
     end
 end
+
+
+ufo.setup({
+    enable_get_fold_virt_text = true,
+    fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate, ctx)
+        local newVirtText = {}
+        local suffix = (' 󰁂 %d '):format(endLnum - lnum)
+        local sufWidth = vim.fn.strdisplaywidth(suffix)
+        local targetWidth = width - sufWidth
+        local curWidth = 0
+        for _, chunk in ipairs(virtText) do
+            local chunkText = chunk[1]
+            local chunkWidth = vim.fn.strdisplaywidth(chunkText)
+            if targetWidth > curWidth + chunkWidth then
+                table.insert(newVirtText, chunk)
+            else
+                chunkText = truncate(chunkText, targetWidth - curWidth)
+                local hlGroup = chunk[2]
+                table.insert(newVirtText, {chunkText, hlGroup})
+                chunkWidth = vim.fn.strdisplaywidth(chunkText)
+                -- str width returned from truncate() may less than 2nd argument, need padding
+                if curWidth + chunkWidth < targetWidth then
+                    suffix = suffix .. (' '):rep(targetWidth - curWidth - chunkWidth)
+                end
+                break
+            end
+            curWidth = curWidth + chunkWidth
+        end
+        table.insert(newVirtText, {suffix, 'MoreMsg'})
+        return newVirtText
+    end,
+    preview = {
+        win_config = {
+            border = "single"
+        }
+    }
+}) --BETTER FOLDING
