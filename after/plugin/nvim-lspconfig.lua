@@ -115,7 +115,7 @@ for _, sign in ipairs(vim.tbl_get(vim.diagnostic.config(), "signs", "values") or
     vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
 end
 
---Clang and CCLS specific config
+--Clang specific config
 local clangd_config = {
     on_attach = on_attach,
     --cmd = { "clangd", "--header-insertion=never" },
@@ -126,17 +126,6 @@ local clangd_config = {
     capabilities = capabilities
 }
 table.insert(clangd_config.cmd, "--query-driver=**")
-
---callback when ccls attaches (platformio development)
-
-vim.api.nvim_create_autocmd("LspAttach", {
-    callback = function(ev)
-        local client = vim.lsp.get_client_by_id(ev.data.client_id).name
-        if client == "ccls" then
-            vim.cmd[[LspStop 1 (clangd)]]
-        end
-    end
-})
 
 --Attaching
 for _, lsp in pairs(servers) do
