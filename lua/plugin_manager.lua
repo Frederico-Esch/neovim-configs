@@ -21,14 +21,9 @@ require("packer").startup(
         use 'nvim-lua/popup.nvim'
         use {
             'nvim-telescope/telescope.nvim',
-            tag = '0.1.4',
             requires = {{ 'nvim-lua/plenary.nvim' }, { 'kyazdani42/nvim-web-devicons' }}
         }
 
-        --use {
-        --    'vim-airline/vim-airline',
-        --    requires = {{'kyazdani42/nvim-web-devicons'}, {'vim-airline/vim-airline-themes'}}
-        --}
         use {
           'nvim-lualine/lualine.nvim',
           requires = { 'kyazdani42/nvim-web-devicons', opt = true }
