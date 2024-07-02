@@ -6,7 +6,7 @@ local icons     = require'icons'
 local ufo       = require'ufo'
 
 --Servers
-local servers = {"clangd", "rust_analyzer", "hls", "gopls", "ols", "zls"} --, "fortls", "ccls",
+local servers = {"clangd", "lua_ls", "rust_analyzer", "hls", "gopls", "ols", "zls"} --"fortls", "ccls",
 
 --Setup
 local client_capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -103,8 +103,8 @@ local diag_config = {
     signs = {
         active = true,
             values = {
-                { name = "DiagnosticSignError", text = icons.diagnostics.Error       },
-                { name = "DiagnosticSignWarn" , text = icons.diagnostics.Warning     },
+                { name = "DiagnosticSignError", text = icons.diagnostics.BoldError       },
+                { name = "DiagnosticSignWarn" , text = icons.diagnostics.BoldWarning     },
                 { name = "DiagnosticSignHint" , text = icons.diagnostics.Hint        },
                 { name = "DiagnosticSignInfo" , text = icons.diagnostics.Information },
             },
