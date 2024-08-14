@@ -13,7 +13,7 @@ config.sections = {
         {
             "mode",
             fmt = function (str)
-                return icons.ui.Circle .. str
+                return (vim.g.have_nerd_font and icons.ui.Circle or "⎊ ") .. str
             end
         }
     },
@@ -26,30 +26,37 @@ config.sections = {
             "diff",
             diff_color = { added = {fg = '#98be65'}, modified = {fg = '#FF8800'}, removed = {fg = '#ec5f67'} },
             symbols = {
-                added = icons.git.LineAdded,
-                modified = icons.git.LineModified,
-                removed = icons.git.LineRemoved
+                added = vim.g.have_nerd_font and icons.git.LineAdded or "+",
+                modified = vim.g.have_nerd_font and icons.git.LineModified or "#",
+                removed = vim.g.have_nerd_font and icons.git.LineRemoved or "-"
             },
         },
         {
             "diagnostics",
             sources = { 'nvim_diagnostic' },
             symbols = {
-                error = icons.diagnostics.BoldError,
-                warn = icons.diagnostics.BoldWarning,
-                info = icons.diagnostics.BoldInformation,
-                hint = icons.diagnostics.BoldHint
+                error = vim.g.have_nerd_font and icons.diagnostics.BoldError or "E",
+                warn =  vim.g.have_nerd_font and icons.diagnostics.BoldWarning or "W",
+                info =  vim.g.have_nerd_font and icons.diagnostics.BoldInformation or "I",
+                hint =  vim.g.have_nerd_font and icons.diagnostics.BoldHint or "H"
             }
         }
     },
     lualine_c = {},
-    lualine_x = {"filetype"}
+    lualine_x = { "filetype", }
 }
 
 config.tabline = {
-    lualine_a = { "buffers" },
+    lualine_a = { "buffers", }
     --lualine_z = { "tabs" }
 }
 
+
+config.options.icons_enabled = vim.g.have_nerd_font
+
+if not vim.g.have_nerd_font then
+    config.options.component_separators = ''
+    config.options.section_separators = { left = '', right = '' }
+end
 
 lualine.setup(config)

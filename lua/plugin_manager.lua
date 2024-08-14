@@ -3,33 +3,34 @@ vim.cmd.packadd [[packer.nvim]]
 
 require("packer").startup(function(use)
 
-        use 'wbthomason/packer.nvim'
+    use 'wbthomason/packer.nvim'
 
-        use 'eemed/sitruuna.vim'
-        use 'hachy/eva01.vim'
+    use 'eemed/sitruuna.vim'
+    use 'hachy/eva01.vim'
 
-        use 'xiyaowong/transparent.nvim'
-        use 'lukas-reineke/indent-blankline.nvim'
+    use 'xiyaowong/transparent.nvim'
+    use 'lukas-reineke/indent-blankline.nvim'
 
-        use 'tpope/vim-surround'
-        use 'easymotion/vim-easymotion'
+    use 'tpope/vim-surround'
+    use 'easymotion/vim-easymotion'
 
 
-        use 'voldikss/vim-floaterm'
-        use 'tpope/vim-fugitive'
+    use 'voldikss/vim-floaterm'
+    use 'tpope/vim-fugitive'
 
-        use {
-            'nvim-telescope/telescope.nvim',
-            requires = {{ 'nvim-lua/plenary.nvim' }, { 'kyazdani42/nvim-web-devicons' }, { 'nvim-lua/popup.nvim' } }
-        }
+    use {
+        'nvim-telescope/telescope.nvim',
+        requires = {{ 'nvim-lua/plenary.nvim' }, { 'kyazdani42/nvim-web-devicons' }, { 'nvim-lua/popup.nvim' } }
+    }
 
-        use {
-          'nvim-lualine/lualine.nvim',
-          requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-        }
+    use {
+      'nvim-lualine/lualine.nvim',
+      requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+    }
 
-        use 'lukas-reineke/indent-blankline.nvim'
-        use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' }
+    use 'lukas-reineke/indent-blankline.nvim'
+    use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' }
 
-        use 'nvim-treesitter/nvim-treesitter'
+    use 'nvim-treesitter/nvim-treesitter'
+    use 'lambdalisue/vim-suda'
 end)

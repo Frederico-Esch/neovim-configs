@@ -3,10 +3,9 @@ local telescope_colors = require"telescope_colors"
 local remap = vim.keymap.set
 local options = { silent = true, noremap = true }
 
-remap("n", "<leader>ff", builtin.find_files , options)
-remap("n", "<leader>bb", builtin.buffers    , options)
-remap("n", "<leader>gf", builtin.git_files  , options)
-remap("n", "<leader>ne", builtin.diagnostics, options)
+remap("n", "<leader>ff", builtin.find_files,  options)
+remap("n", "<leader>bb", builtin.buffers,     options)
+remap("n", "<leader>gf", builtin.git_files,   options)
 remap("n", "<leader>lg", builtin.live_grep,   options)
 remap("n", "<leader>gg", ":Git<CR>",          options)
 
@@ -30,7 +29,7 @@ require("telescope").setup {
                 "--column",
                 "--smart-case",
             },
-            prompt_prefix = "   ",
+            prompt_prefix = vim.g.have_nerd_font and "   " or "> ",
             selection_caret = "➬  ",
             entry_prefix = "  ",
             initial_mode = "normal",
@@ -66,5 +65,9 @@ require("telescope").setup {
                 n = custom_mappings
             }
     },
-    pickers = { find_files = { hidden = true, no_ignore = true } },
+    pickers = {
+        find_files = { hidden = true, no_ignore = true, disable_devicons = not vim.g.have_nerd_font },
+        live_grep =  { disable_devicons = not vim.g.have_nerd_font },
+        git_files =  { disable_devicons = not vim.g.have_nerd_font }
+    },
 }
