@@ -1,27 +1,26 @@
 vim.cmd.packadd [[packer.nvim]]
 
-require("packer").startup(
-    function(use)
+
+require("packer").startup(function(use)
 
         use 'wbthomason/packer.nvim'
 
-
-        use 'sjl/badwolf'
-        use 'wadackel/vim-dogrun'
-        use 'dracula/vim'
         use 'eemed/sitruuna.vim'
-        use 'jaredgorski/SpaceCamp'
         use 'hachy/eva01.vim'
-        use 'EdenEast/nightfox.nvim'
 
         use 'xiyaowong/transparent.nvim'
         use 'lukas-reineke/indent-blankline.nvim'
-        use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' }
 
-        use 'nvim-lua/popup.nvim'
+        use 'tpope/vim-surround'
+        use 'easymotion/vim-easymotion'
+
+
+        use 'voldikss/vim-floaterm'
+        use 'tpope/vim-fugitive'
+
         use {
             'nvim-telescope/telescope.nvim',
-            requires = {{ 'nvim-lua/plenary.nvim' }, { 'kyazdani42/nvim-web-devicons' }}
+            requires = {{ 'nvim-lua/plenary.nvim' }, { 'kyazdani42/nvim-web-devicons' }, { 'nvim-lua/popup.nvim' } }
         }
 
         use {
@@ -29,25 +28,8 @@ require("packer").startup(
           requires = { 'kyazdani42/nvim-web-devicons', opt = true }
         }
 
+        use 'lukas-reineke/indent-blankline.nvim'
+        use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' }
+
         use 'nvim-treesitter/nvim-treesitter'
-        use 'ErichDonGubler/lsp_lines.nvim'
-
-        use 'tommcdo/vim-lion'
-        use 'tpope/vim-surround'
-        use 'easymotion/vim-easymotion'
-
-        use 'voldikss/vim-floaterm'
-        use 'tpope/vim-fugitive'
-        use 'mbbill/undotree'
-
-        use 'neovim/nvim-lspconfig'
-        use 'hrsh7th/cmp-nvim-lsp'
-        use 'hrsh7th/nvim-cmp'
-        use 'hrsh7th/cmp-vsnip'
-        use 'hrsh7th/vim-vsnip'
-        use 'hrsh7th/cmp-nvim-lsp-signature-help'
-        use 'onsails/lspkind.nvim'
-
-        use 'ziglang/zig.vim'
-    end
-)
+end)

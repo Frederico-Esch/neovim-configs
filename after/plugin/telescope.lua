@@ -1,4 +1,5 @@
 local builtin = require("telescope.builtin")
+local telescope_colors = require"telescope_colors"
 local remap = vim.keymap.set
 local options = { silent = true, noremap = true }
 
@@ -7,6 +8,7 @@ remap("n", "<leader>bb", builtin.buffers    , options)
 remap("n", "<leader>gf", builtin.git_files  , options)
 remap("n", "<leader>ne", builtin.diagnostics, options)
 remap("n", "<leader>lg", builtin.live_grep, options)
+
 
 for hl, col in pairs(telescope_colors) do
     vim.api.nvim_set_hl(0, hl, col)

@@ -25,6 +25,8 @@ vim.o.listchars       = "tab:➤ ,lead:·,trail:♥"
 
 vim.g.mapleader = " "
 
+vim.o.tags = ".tags;tags;./tags;./.tags;../.tags;../tags"
+
 if (vim.loop.os_uname().sysname == "Linux") then
     vim.o.undodir = vim.fn.expand("~") .. "/.config/nvim/undodir"
     vim.g.slimv_swank_cmd = "!fish -c 'swank'"

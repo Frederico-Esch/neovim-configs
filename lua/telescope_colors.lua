@@ -66,18 +66,4 @@ local telescope_colors = {
     },
 }
 
-local theme = {
-    Neovim = [[eva01-LCL]], --eva01-LCL badwolf sitruuna lunaperche industry ron carbonfox duskfox nightfox
-    LuaLine = [[palenight]] --powerline moonfly powerline_dark palenight
-}
-
---vim.opt.bg = "dark"
-vim.g["lion_squeeze_spaces"] = 1
-
-get_colors = function()
-    return colors, telescope_colors , theme
-end
-
-return {
-    get_colors = get_colors
-}
+return telescope_colors

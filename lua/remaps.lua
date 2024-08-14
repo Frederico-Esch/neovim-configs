@@ -8,3 +8,6 @@ remap("n", "<c-j>"     , "<c-w>j"    , options)
 remap("n", "<c-k>"     , "<c-w>k"    , options)
 remap("n", "<c-l>"     , "<c-w>l"    , options)
 remap("n", "<leader>rt", ":retab<CR>", options)
+remap("i", "<c-n>"     , "<c-x><c-o>", options)
+
+remap("n", "<leader>gg", ":Git<CR>", options)

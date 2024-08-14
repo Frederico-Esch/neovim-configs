@@ -6,7 +6,7 @@ local lualine = require"lualine"
 local icons = require"icons"
 local config = lualine.get_config()
 
-config.options.theme = theme.LuaLine
+config.options.theme = [[palenight]]
 
 config.sections = {
     lualine_a = {
