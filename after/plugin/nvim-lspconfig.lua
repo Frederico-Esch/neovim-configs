@@ -132,19 +132,50 @@ for _, lsp in pairs(servers) do
 
     if lsp == "clangd" then
         lspconfig[lsp].setup(clangd_config)
-    elseif lsp == "ccls" then
-        lspconfig[lsp].setup(ccls_config)
     else
         lspconfig[lsp].setup {
             on_attach = on_attach,
             flags = {
                 debounce_text_changes = 150,
             },
+            settings = {
+                ada = {
+                    projectFile = "",
+                }
+            },
             capabilities = capabilities
         }
     end
 end
 
+--Ada specific config
+vim.g.AdaConfigured = false
+vim.api.nvim_create_autocmd("LspAttach", {
+    callback = function (ev)
+        local client = vim.lsp.get_client_by_id(ev.data.client_id)
+        if client.name == "als" and not vim.g.AdaConfigured then
+            vim.g.AdaConfigured = true
+            local files = vim.call("glob", vim.call[[getcwd]] .. "/*")
+            local projectFile = string.gmatch(files, "([%a]+.gpr)")()
+
+            if projectFile ~= nil then
+                lspconfig[client.name].setup {
+                    on_attach = on_attach,
+                    flags = {
+                        debounce_text_changes = 150,
+                    },
+                    capabilities = capabilities,
+                    settings = {
+                        ada = {
+                            projectFile = projectFile
+                        }
+                    }
+                }
+            end
+        end
+    end
+
+})
 
 ufo.setup({
     enable_get_fold_virt_text = true,
