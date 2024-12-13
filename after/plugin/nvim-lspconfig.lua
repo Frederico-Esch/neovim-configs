@@ -6,7 +6,7 @@ local icons     = require'icons'
 local ufo       = require'ufo'
 
 --Servers
-local servers = {"clangd", "lua_ls", "rust_analyzer", "hls", "gopls", "ols", "zls", "als"} --"fortls", "ccls",
+local servers = {"clangd", "rust_analyzer", "hls", "gopls", "ols", "zls", "als"} --"fortls", "ccls","lua_ls",
 
 --Setup
 local client_capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -174,7 +174,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
             end
         end
     end
-
 })
 
 ufo.setup({
