@@ -35,6 +35,7 @@ require("packer").startup(
         use 'tommcdo/vim-lion'
         use 'tpope/vim-surround'
         use 'easymotion/vim-easymotion'
+        use 'lambdalisue/vim-suda'
 
         use 'voldikss/vim-floaterm'
         use 'tpope/vim-fugitive'
