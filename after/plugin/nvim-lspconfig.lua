@@ -84,8 +84,8 @@ cmp.setup({
         ["<C-f>"]     = cmp.mapping.scroll_docs(-4),
         ["<C-Space>"] = cmp.mapping.complete(),
         ["<C-e>"]     = cmp.mapping.abort(),
-        ["<Tab>"]     = cmp.mapping.select_next_item(),
-        ["<S-Tab>"]   = cmp.mapping.select_prev_item(),
+        --["<Tab>"]     = cmp.mapping.select_next_item(),
+        --["<S-Tab>"]   = cmp.mapping.select_prev_item(),
         ["<CR>"]      = cmp.mapping.confirm({ select = false}),
     }),
     sources = cmp.config.sources(
@@ -141,6 +141,9 @@ for _, lsp in pairs(servers) do
             settings = {
                 ada = {
                     projectFile = "",
+                },
+                zls = {
+                    enable_build_on_save = true
                 }
             },
             capabilities = capabilities
