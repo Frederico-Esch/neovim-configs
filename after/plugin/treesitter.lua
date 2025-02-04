@@ -7,11 +7,16 @@ require'nvim-treesitter.configs'.setup {
         "rust",
         "toml",
         "zig",
-        --"python",
+        "python",
         "haskell",
         "json",
-        "yaml",
         "go",
+        "odin",
+        "query",
+        "vim",
+        "vimdoc",
+        "ada",
+        "cmake"
     },
 
     highlight = {

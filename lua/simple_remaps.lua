@@ -1,6 +1,7 @@
 local remap = vim.keymap.set
 
 local options = { silent = true, noremap = true }
+remap("n", "<tab>"     , ":bp<cr>"   , options)
 remap("n", "<s-tab>"   , ":bn<cr>"   , options)
 remap("n", "<s-w>"     , ":bd<cr>"   , options)
 remap("n", "<c-h>"     , "<c-w>h"    , options)

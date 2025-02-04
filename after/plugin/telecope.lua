@@ -13,7 +13,15 @@ for hl, col in pairs(telescope_colors) do
 end
 
 local _, actions = pcall(require, "telescope.actions")
-local custom_mappings = { ["<C-s>"] = actions.send_selected_to_qflist + actions.open_qflist }
+local insert_mappings = {
+    ["<C-s>"] = actions.send_selected_to_qflist + actions.open_qflist
+}
+local normal_mappings = {
+    ["o"] = actions.file_vsplit,
+    ["O"] = actions.file_split,
+    ["B"] = actions.delete_buffer,
+    ["<C-s>"] = actions.send_selected_to_qflist + actions.open_qflist
+}
 
 require("telescope").setup {
         defaults = {
@@ -59,8 +67,8 @@ require("telescope").setup {
             grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
             qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
             mappings = {
-                i = custom_mappings,
-                n = custom_mappings
+                i = insert_mappings,
+                n = normal_mappings
             }
     },
     pickers = { find_files = { hidden = true, no_ignore = true } },
