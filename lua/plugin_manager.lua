@@ -9,7 +9,6 @@ require("packer").startup(function(use)
     use 'hachy/eva01.vim'
 
     use 'xiyaowong/transparent.nvim'
-    use 'lukas-reineke/indent-blankline.nvim'
 
     use 'tpope/vim-surround'
     use 'easymotion/vim-easymotion'
