@@ -133,12 +133,12 @@ return {
     TriangleShortArrowUp = "",
   },
   diagnostics = {
-    BoldError = " ",
-    Error = "",
+    BoldError = " ", --
+    Error = " ",
     BoldWarning = " ",
-    Warning = "",
+    Warning = " ",
     BoldInformation = " ",
-    Information = "",
+    Information = " ",
     BoldQuestion = "",
     Question = "",
     BoldHint = " ",

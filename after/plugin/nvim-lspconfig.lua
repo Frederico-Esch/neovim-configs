@@ -60,8 +60,8 @@ local diag_config = {
     signs = {
         active = true,
             values = {
-                { name = "DiagnosticSignError", text = icons.diagnostics.BoldError       },
-                { name = "DiagnosticSignWarn" , text = icons.diagnostics.BoldWarning     },
+                { name = "DiagnosticSignError", text = icons.diagnostics.Error       },
+                { name = "DiagnosticSignWarn" , text = icons.diagnostics.Warning     },
                 { name = "DiagnosticSignHint" , text = icons.diagnostics.Hint        },
                 { name = "DiagnosticSignInfo" , text = icons.diagnostics.Information },
             },
