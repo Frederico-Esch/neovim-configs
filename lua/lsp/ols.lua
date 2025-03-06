@@ -5,6 +5,18 @@ local ols_config = {
     flags = {
         debounce_text_changes = config.debounce_text_changes,
     },
+    init_options = {
+        enable_format = false,
+        enable_document_symbols = true,
+        enable_semantic_tokens = true,
+        enable_snippets = true,
+        enable_references = true,
+        enable_fake_methods = false,
+        enable_inlay_hints = true,
+        enable_procedure_snippet = true,
+        enable_rename = true,
+        verbose = true
+    },
     capabilities = config.capabilities
 }
 
