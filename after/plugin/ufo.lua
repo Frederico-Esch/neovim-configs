@@ -6,6 +6,25 @@ vim.o.foldenable = true
 
 ufo.setup({
     enable_get_fold_virt_text = true,
+    provider_selector = function(bufnr, filetype, buftype) --maybe not use this?
+        return {'treesitter', 'indent'}
+    end,
+    --[[ folding on regions c++
+(
+  (preproc_call
+    directive: (_) @_dir
+    argument: (_) @_arg_begin
+    (#eq? @_arg_begin "region")) @_beg_region
+  (_)*  @inner
+  (preproc_call
+    directive: (_) @_dir
+    argument: (_) @_arg_end
+    (#eq? @_arg_end "endregion")
+    ) @_end_region
+  (#eq? @_dir "#pragma")
+  (#make-range! "fold" @_beg_region @_end_region)
+)
+    --]]
     fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate, ctx)
         local newVirtText = {}
         local suffix = (' 󰁂 %d '):format(endLnum - lnum)

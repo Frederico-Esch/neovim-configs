@@ -29,6 +29,7 @@ require("packer").startup(
         }
 
         use 'nvim-treesitter/nvim-treesitter'
+        use 'nvim-treesitter/nvim-treesitter-textobjects'
         use 'ErichDonGubler/lsp_lines.nvim'
 
         use 'tommcdo/vim-lion'
