@@ -14,7 +14,7 @@ ufo.setup({
   (preproc_call
     directive: (_) @_dir
     argument: (_) @_arg_begin
-    (#eq? @_arg_begin "region")) @_beg_region
+    (#match? @_arg_begin "region*")) @_beg_region
   (_)*  @inner
   (preproc_call
     directive: (_) @_dir
