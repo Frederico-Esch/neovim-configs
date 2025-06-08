@@ -11,6 +11,6 @@ local clangd_config = {
 }
 table.insert(clangd_config.cmd, "--query-driver=**")
 table.insert(clangd_config.cmd, "--fallback-style=webkit")
-table.insert(clangd_config.cmd, "--compile-commands-dir=build")
+table.insert(clangd_config.cmd, "--compile-commands-dir=./build")
 
 return clangd_config

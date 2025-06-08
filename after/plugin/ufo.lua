@@ -12,16 +12,18 @@ ufo.setup({
     --[[ folding on regions c++
 (
   (preproc_call
-    directive: (_) @_dir
+    directive: (_) @_dir_1
     argument: (_) @_arg_begin
-    (#eq? @_arg_begin "region")) @_beg_region
+    (#match? @_arg_begin "^region.*$")
+    (#eq? @_dir_1 "#pragma")
+    ) @_beg_region
   (_)*  @inner
   (preproc_call
-    directive: (_) @_dir
+    directive: (_) @_dir_2
     argument: (_) @_arg_end
-    (#eq? @_arg_end "endregion")
+    (#match? @_arg_end "^endregion.*$")
+    (#eq? @_dir_2 "#pragma")
     ) @_end_region
-  (#eq? @_dir "#pragma")
   (#make-range! "fold" @_beg_region @_end_region)
 )
     --]]

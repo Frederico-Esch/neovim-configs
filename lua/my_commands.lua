@@ -8,6 +8,22 @@ vim.api.nvim_create_user_command(
     {nargs = 1}
 )
 
+vim.api.nvim_create_user_command(
+    "MinGWFixCompileDB",
+    function(args)
+        if table.getn(vim.lsp.buf_get_clients()) == 0 then return end
+        if vim.lsp.buf_get_clients()[1].name ~= 'clangd' then return end
+
+        local path = vim.lsp.buf.list_workspace_folders()[1] .. "/compile_commands.json"
+        vim.fn.setqflist({ {filename = path, lnum = 1} }, 'r')
+        vim.cmd.cdo[[%s/\/e/e:/g]]
+        vim.cmd.cdo[[%s/[A-z0-9/]\{-}\(.\{2,3}\).exe/\1]]
+        vim.cmd.cdo[[w]]
+        vim.cmd.cdo[[bd]]
+    end,
+    {nargs = 0}
+)
+
 vim.api.nvim_create_autocmd("TextYankPost", {
     desc = "Highlight when yanking text",
     group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
