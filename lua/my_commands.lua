@@ -56,3 +56,11 @@ vim.api.nvim_create_autocmd("FileType", {
         end
     end
 })
+
+vim.api.nvim_create_user_command(
+    "CleanEspCompile",
+    function(args)
+        vim.cmd([[%s/\(-fno-shrink-wrap\|-fstrict-volatile-bitfields\|-fno-tree-switch-conversion\)//g]])
+    end,
+    {nargs = 0}
+)
