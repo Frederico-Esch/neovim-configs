@@ -33,6 +33,8 @@ ufo.setup({
         local sufWidth = vim.fn.strdisplaywidth(suffix)
         local targetWidth = width - sufWidth
         local curWidth = 0
+
+        --begin
         for _, chunk in ipairs(virtText) do
             local chunkText = chunk[1]
             local chunkWidth = vim.fn.strdisplaywidth(chunkText)
@@ -51,7 +53,14 @@ ufo.setup({
             end
             curWidth = curWidth + chunkWidth
         end
-        table.insert(newVirtText, {suffix, 'MoreMsg'})
+
+
+        table.insert(newVirtText, {suffix, 'MoreMsg'}) --middle
+
+        for _, v in ipairs(ctx.get_fold_virt_text(endLnum)) do
+            table.insert(newVirtText, v)
+        end
+
         return newVirtText
     end,
     preview = {
