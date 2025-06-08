@@ -15,7 +15,6 @@ require("packer").startup(
 
         use 'xiyaowong/transparent.nvim'
         use 'lukas-reineke/indent-blankline.nvim'
-        use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' }
 
         use 'nvim-lua/popup.nvim'
         use {

@@ -1,5 +1,3 @@
-local ufo = require'ufo'
-
 local config = {}
 
 local client_capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -25,13 +23,7 @@ function on_attach(client, bufnr)
     remap("n"  , "<leader>e" , "<cmd>lua vim.diagnostic.open_float()<CR>", options)
     remap("n"  , "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>"  , options)
     remap("n"  , "<leader>f" , "<cmd>lua vim.lsp.buf.format()<CR>"       , options)
-    remap("n"  , "K"         ,
-        function()
-            if not ufo.peekFoldedLinesUnderCursor() then
-                vim.lsp.buf.hover()
-            end
-        end,
-    options)
+    remap("n"  , "K"         , "<cmd>vim.lsp.buf.hover()<CR>"            , options)
     remap("n"  , "<leader>rn",
         function()
              vim.api.nvim_create_autocmd({ "CmdlineEnter" }, {
