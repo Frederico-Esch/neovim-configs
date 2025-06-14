@@ -1,18 +1,20 @@
 ;; extends
 
-(
+(_
   (preproc_call
-    directive: (_) @_dir_1
-    argument: (_) @_arg_begin
-    (#match? @_arg_begin "^region.*$")
-    (#eq? @_dir_1 "#pragma")
-    ) @_beg_region
-  (_)*  @inner
+    directive: _ @dir_1
+    argument: _ @arg_1
+    (#eq? @dir_1 "#pragma")
+    (#match? @arg_1 "^region")
+    ) @fold
+  .
+  _ @fold
+  _? @fold
+  .
   (preproc_call
-    directive: (_) @_dir_2
-    argument: (_) @_arg_end
-    (#match? @_arg_end "^endregion.*$")
-    (#eq? @_dir_2 "#pragma")
-    ) @_end_region
-  (#make-range! "fold" @_beg_region @_end_region)
+    directive: _ @dir_2
+    argument: _ @arg_2
+    (#eq? @dir_2 "#pragma")
+    (#match? @arg_2 "^endregion")
+    ) @fold
 )

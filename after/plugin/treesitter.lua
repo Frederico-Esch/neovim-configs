@@ -83,13 +83,29 @@ local function parse_line(linenr)
 
   local line_pos = 0
 
+
   for id, node, metadata in query:iter_captures(tree:root(), 0, linenr - 1, linenr) do
     local name = query.captures[id]
     local start_row, start_col, end_row, end_col = node:range()
 
     local priority = tonumber(metadata.priority or vim.highlight.priorities.treesitter)
 
-    if start_row == linenr - 1 and end_row == linenr - 1 then
+    if node:type() == "preproc_directive" then --pragma regions are bizarre
+        local parent = node:parent()
+        local args = parent:child(1)
+        local sr, sc, er, ec = args:range()
+        sc = sc + 1
+        local arg_str = line:sub(sc, -1)
+
+        if arg_str:find(" ") ~= nil then --region Name thingy
+            local idx, _ = arg_str:find(" ")
+            idx = idx
+            table.insert(result, { arg_str:sub(0, idx), { {"@comment.c", 100 } }, range = { 0, idx }})
+            table.insert(result, { arg_str:sub(idx+1, -1), { {"@constant.c", 100 } }, range = { idx, #arg_str }})
+        else
+            --table.insert(result, { line:sub(sc, -1), { {"@comment.c", 100 } }, range = { sc, #line }}) --Show endregion
+        end
+    elseif start_row == linenr - 1 and end_row == linenr - 1 then
       -- check for characters ignored by treesitter
       if start_col > line_pos then
         table.insert(result, {
@@ -103,6 +119,7 @@ local function parse_line(linenr)
       local text = line:sub(start_col + 1, end_col)
       table.insert(result, { text, { { "@" .. name, priority } }, range = { start_col, end_col } })
     end
+
   end
 
   local i = 1
