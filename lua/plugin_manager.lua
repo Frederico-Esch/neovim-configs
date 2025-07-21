@@ -29,8 +29,8 @@ require("packer").startup(function(use)
     }
 
     use 'lukas-reineke/indent-blankline.nvim'
-    use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' }
 
     use 'nvim-treesitter/nvim-treesitter'
+    use 'nvim-treesitter/nvim-treesitter-textobjects'
     use 'lambdalisue/vim-suda'
 end)
