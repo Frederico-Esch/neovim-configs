@@ -1,4 +1,4 @@
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
 
 require"plugin_manager"
 require"appearence"

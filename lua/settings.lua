@@ -36,4 +36,8 @@ if (vim.loop.os_uname().sysname == "Linux") then
 else
     vim.o.undodir = vim.fn.expand("~") .. "\\AppData\\Local\\nvim\\undodir"
     vim.g.python3_host_prog = "E:/Aplicativos/python/python.exe"
+    vim.o.shell = "powershell.exe"
+    vim.o.shellcmdflag = "-command"
+    vim.o.shellquote = ""
+    vim.o.shellxquote = ""
 end

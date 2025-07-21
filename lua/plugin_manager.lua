@@ -7,6 +7,7 @@ require("packer").startup(function(use)
 
     use 'eemed/sitruuna.vim'
     use 'hachy/eva01.vim'
+    use 'Mofiqul/dracula.nvim'
 
     use 'xiyaowong/transparent.nvim'
 

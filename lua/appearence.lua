@@ -1,1 +1,1 @@
-vim.cmd.colorscheme([[eva01-LCL]])
+vim.cmd.colorscheme([[dracula]])
