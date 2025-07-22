@@ -28,8 +28,10 @@ ufo.setup({
         local curWidth = 0
 
         local begin = false
+        local hadPragma = false
         for _, chunk in ipairs(virtText) do
-            if begin or (not isPragma(chunk[1]) and not isWhitespace(chunk[1])) then
+            hadPragma = isPragma(chunk[1]) or hadPragma
+            if begin or (not isPragma(chunk[1]) and not (hadPragma and isWhitespace(chunk[1]))) then
                 begin = true
                 local chunkText = chunk[1]
                 local chunkWidth = vim.fn.strdisplaywidth(chunkText)
