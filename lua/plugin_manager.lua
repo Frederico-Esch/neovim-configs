@@ -30,6 +30,7 @@ require("packer").startup(
         use 'nvim-treesitter/nvim-treesitter'
         use 'nvim-treesitter/nvim-treesitter-textobjects'
         use 'ErichDonGubler/lsp_lines.nvim'
+        use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
 
         use 'tommcdo/vim-lion'
         use 'tpope/vim-surround'
