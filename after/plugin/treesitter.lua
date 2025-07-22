@@ -164,9 +164,9 @@ function HighlightedFoldtext()
   return result
 end
 
-vim.o.foldlevel = 99
-vim.o.foldlevelstart = 99
-vim.o.foldenable = true
-vim.o.foldmethod = "expr"
-vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-vim.opt.foldtext = "v:lua.HighlightedFoldtext()"
+--vim.o.foldlevel = 99
+--vim.o.foldlevelstart = 99
+--vim.o.foldenable = true
+--vim.o.foldmethod = "expr"
+--vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+--vim.opt.foldtext = "v:lua.HighlightedFoldtext()"

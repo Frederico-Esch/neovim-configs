@@ -15,12 +15,12 @@ local colors = {
 
 local telescope_colors = {
     TelescopeBorder = {
-        fg = colors.blackest_gravel,
-        bg = colors.blackest_gravel,
+        fg = colors.white,
+        bg = colors.tardis_dark,
     },
 
     TelescopePromptBorder = {
-        fg = colors.tardis_dark,
+        fg = colors.white,
         bg = colors.tardis_dark,
     },
 

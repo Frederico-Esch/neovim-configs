@@ -17,6 +17,10 @@ vim.api.nvim_create_user_command(
         --print(vim.call('fnamemodify', dir, ""))
         --print(vim.call('fnamemodify', dir, ":p"))
 
+        --I need to fix a bunch of things here:
+        -- -filtering for c,h,cpp but not hpp
+        -- -using gcc won't work for ANYTHING other than c lmao
+        -- -language force should have a custom behaviour for other languages
         local paths_to_ignore = dir .. "/" .. genctags_ignore_paths
         local files = vim.fn.system("find " .. dir .. " -path " .. paths_to_ignore .. [[ -prune -o -regex ".*\.\(c\|h\|cpp\)" -print]], true)
         if files ~= "" then
