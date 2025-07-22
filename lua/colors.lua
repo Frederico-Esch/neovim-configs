@@ -15,12 +15,12 @@ local colors = {
 
 local telescope_colors = {
     TelescopeBorder = {
-        fg = colors.blackest_gravel,
-        bg = colors.blackest_gravel,
+        fg = colors.white,
+        bg = colors.tardis_dark,
     },
 
     TelescopePromptBorder = {
-        fg = colors.tardis_dark,
+        fg = colors.white,
         bg = colors.tardis_dark,
     },
 
@@ -67,8 +67,8 @@ local telescope_colors = {
 }
 
 local theme = {
-    Neovim = [[badwolf]], --eva01-LCL eva01-LCL badwolf sitruuna lunaperche industry ron carbonfox duskfox nightfox
-    LuaLine = [[powerline_dark]] --palenight powerline moonfly powerline_dark palenight wombat
+    Neovim = [[dracula]], --eva01-LCL eva01-LCL badwolf sitruuna lunaperche industry ron carbonfox duskfox nightfox
+    LuaLine = [[dracula]] --palenight powerline moonfly powerline_dark palenight wombat
 }
 
 --vim.opt.bg = "dark"
