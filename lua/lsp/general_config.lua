@@ -1,3 +1,4 @@
+local ufo = require'ufo'
 local config = {}
 
 local client_capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -16,6 +17,22 @@ function on_attach(client, bufnr)
         silent  = true,
         buffer  = bufnr
     }
+    local openDocsOrFoldInfo = function()
+        if not ufo.peekFoldedLinesUnderCursor() then
+            vim.lsp.buf.hover({ border = "rounded" })
+        end
+    end
+    local rename = function()
+         vim.api.nvim_create_autocmd({ "CmdlineEnter" }, {
+            callback = function()
+                local key = vim.api.nvim_replace_termcodes("<C-f>", true, false, true)
+                vim.api.nvim_feedkeys(key, "c", false)
+                vim.api.nvim_feedkeys("0", "n", false)
+                return true
+            end,
+        })
+        vim.lsp.buf.rename()
+    end
 
     remap("n"  , "gd"        , "<cmd>lua vim.lsp.buf.definition()<CR>"   , options)
     remap("n"  , "gD"        , "<cmd>lua vim.lsp.buf.declaration()<CR>"  , options)
@@ -23,20 +40,8 @@ function on_attach(client, bufnr)
     remap("n"  , "<leader>e" , "<cmd>lua vim.diagnostic.open_float()<CR>", options)
     remap("n"  , "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>"  , options)
     remap("n"  , "<leader>f" , "<cmd>lua vim.lsp.buf.format()<CR>"       , options)
-    remap("n"  , "K"         , "<cmd>lua vim.lsp.buf.hover()<CR>"        , options)
-    remap("n"  , "<leader>rn",
-        function()
-             vim.api.nvim_create_autocmd({ "CmdlineEnter" }, {
-                callback = function()
-                    local key = vim.api.nvim_replace_termcodes("<C-f>", true, false, true)
-                    vim.api.nvim_feedkeys(key, "c", false)
-                    vim.api.nvim_feedkeys("0", "n", false)
-                    return true
-                end,
-            })
-            vim.lsp.buf.rename()
-        end,
-    options)
+    remap("n"  , "K"         , openDocsOrFoldInfo                        , options)
+    remap("n"  , "<leader>rn", rename                                    , options)
 end
 config.on_attach = on_attach
 
