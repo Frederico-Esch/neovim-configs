@@ -12,6 +12,7 @@ require("packer").startup(
         use 'jaredgorski/SpaceCamp'
         use 'hachy/eva01.vim'
         use 'EdenEast/nightfox.nvim'
+        use 'srcery-colors/srcery-vim'
 
         use 'xiyaowong/transparent.nvim'
         use 'lukas-reineke/indent-blankline.nvim'

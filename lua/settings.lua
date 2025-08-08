@@ -25,6 +25,10 @@ vim.o.listchars       = "tab:➤ ,lead:·,trail:♥"
 
 vim.g.mapleader = " "
 
+if vim.g.neovide then
+    vim.o.guifont = "ComicCodeLigatures Nerd Font Mono"
+end
+
 if (vim.loop.os_uname().sysname == "Linux") then
     vim.o.undodir = vim.fn.expand("~") .. "/.config/nvim/undodir"
     vim.g.slimv_swank_cmd = "!fish -c 'swank'"
@@ -38,4 +42,5 @@ else
     vim.o.shellcmdflag = "-command"
     vim.o.shellquote = ""
     vim.o.shellxquote = ""
+    vim.g.undotree_DiffCommand = "FC"
 end

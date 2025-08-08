@@ -2,7 +2,11 @@ vim.api.nvim_create_user_command(
     "IncreaseFontGui",
     function(args)
         if vim.g.neovide then
-            vim.opt.guifont = { "", ":h"..args.args }
+            local oldfont = vim.o.guifont
+            if type(oldfont) == "table" then
+                oldfont = oldfont[1]
+            end
+            vim.opt.guifont = { oldfont, ":h"..args.args }
         end
     end,
     {nargs = 1}
