@@ -8,5 +8,5 @@ local gopls_config = {
     capabilities = config.capabilities
 }
 
-
+vim.lsp.config['gopls'] = gopls_config
 return gopls_config

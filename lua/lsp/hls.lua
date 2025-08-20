@@ -8,5 +8,5 @@ local hls_config = {
     capabilities = config.capabilities
 }
 
-
+vim.lsp.config['hls'] = hls_config
 return hls_config;

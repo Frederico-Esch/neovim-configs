@@ -41,4 +41,5 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
 })
 
+vim.lsp.config['ada_ls'] = als_config
 return als_config

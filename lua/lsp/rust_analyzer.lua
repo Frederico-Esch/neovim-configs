@@ -8,5 +8,5 @@ local rust_analyzer_config = {
     capabilities = config.capabilities
 }
 
-
+vim.lsp.config['rust_analyzer'] = rust_analyzer_config
 return rust_analyzer_config

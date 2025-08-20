@@ -20,5 +20,5 @@ local ols_config = {
     capabilities = config.capabilities
 }
 
-
+vim.lsp.config['ols'] = ols_config
 return ols_config

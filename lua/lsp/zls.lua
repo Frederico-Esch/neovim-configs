@@ -13,5 +13,5 @@ local zls_config = {
     capabilities = config.capabilities,
 }
 
-
+vim.lsp.config['zls'] = zls_config
 return zls_config
