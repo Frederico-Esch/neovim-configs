@@ -1,6 +1,6 @@
 --Inclusions
 local cmp       = require'cmp'
-local lspconfig = require'lspconfig'
+local lspconfig = vim.lsp
 local lspkind   = require'lspkind'
 local icons     = require'icons'
 
@@ -94,6 +94,7 @@ vim.diagnostic.config(diag_config)
 for _, lsp in pairs(servers) do
 
     config = require("lsp." .. lsp)
-    lspconfig[lsp].setup(config)
+    lspconfig.enable(lsp)
+    lspconfig.config(lsp, config)
 
 end

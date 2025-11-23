@@ -13,7 +13,7 @@ local als_config = {
     capabilities = config.capabilities,
 }
 
-lspconfig = require"lspconfig"
+lspconfig = vim.lsp
 vim.g.AdaConfigured = false
 vim.api.nvim_create_autocmd("LspAttach", {
     callback = function (ev)
@@ -24,7 +24,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
             local projectFile = string.gmatch(files, "([%a]+.gpr)")()
 
             if projectFile ~= nil then
-                lspconfig[client.name].setup {
+                lspconfig.config(client.name,{
                     on_attach = on_attach,
                     flags = {
                         debounce_text_changes = 150,
@@ -35,7 +35,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
                             projectFile = projectFile
                         }
                     }
-                }
+                })
             end
         end
     end
