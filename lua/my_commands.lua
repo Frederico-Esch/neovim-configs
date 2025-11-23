@@ -3,8 +3,8 @@ vim.api.nvim_create_user_command(
     function(args)
         if vim.g.neovide then
             local oldfont = vim.o.guifont
-            if type(oldfont) == "table" then
-                oldfont = oldfont[1]
+            if oldfont:find(",") ~= nil then
+                oldfont = oldfont:sub(1, oldfont:find(","))
             end
             vim.opt.guifont = { oldfont, ":h"..args.args }
         end
