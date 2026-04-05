@@ -1,5 +1,12 @@
 require 'nvim-treesitter.install'.compilers = { "clang" }
-require'nvim-treesitter.config'.setup {
+
+local package_name = 'nvim-treesitter.configs'
+
+if (vim.loop.os_uname().sysname == "Linux") then --For some reason in Windows this package is using the deprecated name
+    package_name = 'nvim-treesitter.config'
+end
+
+require(package_name).setup {
     ensure_installed = {
         "c",
         "cpp",
