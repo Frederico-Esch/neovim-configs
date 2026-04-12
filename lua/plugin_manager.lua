@@ -8,7 +8,7 @@ require("packer").startup(
         use 'sjl/badwolf'
         use 'wadackel/vim-dogrun'
         use 'dracula/vim'
-        use 'eemed/sitruuna.vim'
+        --use 'eemed/sitruuna.vim'
         use 'jaredgorski/SpaceCamp'
         use 'hachy/eva01.vim'
         use 'EdenEast/nightfox.nvim'
@@ -29,8 +29,14 @@ require("packer").startup(
           requires = { 'kyazdani42/nvim-web-devicons', opt = true }
         }
 
-        use 'nvim-treesitter/nvim-treesitter'
-        use 'nvim-treesitter/nvim-treesitter-textobjects'
+        use {
+            'nvim-treesitter/nvim-treesitter',
+            branch = "main"
+        }
+        use {
+            'nvim-treesitter/nvim-treesitter-textobjects',
+            branch = "main"
+        }
         use 'ErichDonGubler/lsp_lines.nvim'
         use {'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async'}
 

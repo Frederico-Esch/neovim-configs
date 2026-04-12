@@ -1,29 +1,34 @@
 require 'nvim-treesitter.install'.compilers = { "clang" }
 
-local package_name = 'nvim-treesitter.configs'
-
-if (vim.loop.os_uname().sysname == "Linux") then --For some reason in Windows this package is using the deprecated name
-    package_name = 'nvim-treesitter.config'
-end
+local package_name = 'nvim-treesitter.config'
 
 require(package_name).setup {
     ensure_installed = {
+        "ada",
+        "asm",
+        "awk",
         "c",
+        "c_sharp",
+        "cmake",
         "cpp",
-        "lua",
-        "rust",
-        "toml",
-        "zig",
-        "python",
+        "css",
+        "go",
         "haskell",
         "json",
-        "go",
+        "lua",
+        "luadoc",
+        "markdown",
+        "markdown_inline",
+        "nasm",
         "odin",
+        "python",
         "query",
+        "rust",
+        "sql",
+        "toml",
         "vim",
         "vimdoc",
-        "ada",
-        "cmake"
+        "zig",
     },
 
     highlight = {
