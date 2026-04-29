@@ -6,7 +6,7 @@ vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 
 local isWhitespace = function(s)
-    return s:match("%s") ~= nil
+    return s:match("[^%s]") == nil
 end
 local isPragma = function(s)
     return s == "#pragma"
@@ -56,7 +56,13 @@ ufo.setup({
 
         begin = false
         for _, v in ipairs(ctx.get_fold_virt_text(endLnum)) do
+            print(v[1])
+            print(string.len(v[1]))
+            print(isWhitespace(v[1]))
+            print(isPragma(v[1]))
+            print(isEndregion(v[1]))
             if begin or (not isWhitespace(v[1]) and not isPragma(v[1]) and not isEndregion(v[1])) then
+                print('was added')
                 begin = true
                 table.insert(newVirtText, v)
             end
