@@ -8,11 +8,14 @@ vim.o.foldenable = true
 local isWhitespace = function(s)
     return s:match("[^%s]") == nil
 end
-local isPragma = function(s)
-    return s == "#pragma"
+local hasPragma = function(s)
+    return s:match("#pragma") ~= nil
 end
-local isEndregion = function(s)
-    return s == "endregion"
+local hasEndregion = function(s)
+    return s:match("endregion") ~= nil
+end
+local trim = function(s)
+    return s:gsub("^%s+", ""):gsub("%s+$", "")
 end
 
 ufo.setup({
@@ -27,38 +30,33 @@ ufo.setup({
         local targetWidth = width - sufWidth
         local curWidth = 0
 
-        local begin = false
-        local hadPragma = false
         for _, chunk in ipairs(virtText) do
-            hadPragma = isPragma(chunk[1]) or hadPragma
-            if begin or (not isPragma(chunk[1]) and not (hadPragma and isWhitespace(chunk[1]))) then
-                begin = true
-                local chunkText = chunk[1]
-                local chunkWidth = vim.fn.strdisplaywidth(chunkText)
-                if targetWidth > curWidth + chunkWidth then
-                    table.insert(newVirtText, chunk)
-                else
-                    chunkText = truncate(chunkText, targetWidth - curWidth)
-                    local hlGroup = chunk[2]
-                    table.insert(newVirtText, {chunkText, hlGroup})
-                    chunkWidth = vim.fn.strdisplaywidth(chunkText)
-                    -- str width returned from truncate() may less than 2nd argument, need padding
-                    if curWidth + chunkWidth < targetWidth then
-                        suffix = suffix .. (' '):rep(targetWidth - curWidth - chunkWidth)
-                    end
-                    break
+            chunk[1] = trim(chunk[1]:gsub("#pragma", ""))
+            local chunkText = chunk[1]
+            local chunkWidth = vim.fn.strdisplaywidth(chunkText)
+            if targetWidth > curWidth + chunkWidth then
+                table.insert(newVirtText, chunk)
+            else
+                chunkText = truncate(chunkText, targetWidth - curWidth)
+                local hlGroup = chunk[2]
+                table.insert(newVirtText, {chunkText, hlGroup})
+                chunkWidth = vim.fn.strdisplaywidth(chunkText)
+                -- str width returned from truncate() may less than 2nd argument, need padding
+                if curWidth + chunkWidth < targetWidth then
+                    suffix = suffix .. (' '):rep(targetWidth - curWidth - chunkWidth)
                 end
-                curWidth = curWidth + chunkWidth
+                break
             end
+            curWidth = curWidth + chunkWidth
         end
 
         table.insert(newVirtText, {suffix, 'MoreMsg'}) --middle
 
         begin = false
         for _, v in ipairs(ctx.get_fold_virt_text(endLnum)) do
-            if begin or (not isWhitespace(v[1]) and not isPragma(v[1]) and not isEndregion(v[1])) then
+            v[1] = trim(v[1])
+            if begin or (not isWhitespace(v[1]) and not hasPragma(v[1]) and not hasEndregion(v[1])) then
                 begin = true
-                v[1] = v[1]:gsub("^%s+", "")
                 table.insert(newVirtText, v)
             end
         end
