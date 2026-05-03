@@ -34,8 +34,8 @@ cmp.setup({
     formatting = formatting_config,
     experimental = experimental_config,
     window = {
-        --completion = cmp.config.window.bordered(),
-        --documentation = cmp.config.window.bordered(),
+        completion = cmp.config.window.bordered({ border = 'rounded', winhighlight = "Normal:Normal,FloatBorder:BorderBG,CursorLine:PmenuSel,Search:None", }),
+        documentation = cmp.config.window.bordered({ border = 'rounded', winhighlight = "Normal:Normal,FloatBorder:BorderBG,CursorLine:PmenuSel,Search:None",  }),
     },
     mapping = cmp.mapping.preset.insert({
         ["<C-b>"]     = cmp.mapping.scroll_docs(4),
