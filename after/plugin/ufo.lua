@@ -58,6 +58,7 @@ ufo.setup({
         for _, v in ipairs(ctx.get_fold_virt_text(endLnum)) do
             if begin or (not isWhitespace(v[1]) and not isPragma(v[1]) and not isEndregion(v[1])) then
                 begin = true
+                v[1] = v[1]:gsub("^%s+", "")
                 table.insert(newVirtText, v)
             end
         end
