@@ -13,7 +13,9 @@ require("packer").startup(
         use 'hachy/eva01.vim'
         use 'EdenEast/nightfox.nvim'
         use 'srcery-colors/srcery-vim'
-        use 'maxmx03/fluoromachine.nvim'
+        use 'navarasu/onedark.nvim'
+        use 'tiagovla/tokyodark.nvim'
+        use 'ribru17/bamboo.nvim'
 
         use 'xiyaowong/transparent.nvim'
         use 'lukas-reineke/indent-blankline.nvim'
