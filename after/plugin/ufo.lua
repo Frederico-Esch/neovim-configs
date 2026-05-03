@@ -31,7 +31,7 @@ ufo.setup({
         local curWidth = 0
 
         for _, chunk in ipairs(virtText) do
-            chunk[1] = trim(chunk[1]:gsub("#pragma", ""))
+            chunk[1] = chunk[1]:gsub("#pragma ", "")
             local chunkText = chunk[1]
             local chunkWidth = vim.fn.strdisplaywidth(chunkText)
             if targetWidth > curWidth + chunkWidth then
