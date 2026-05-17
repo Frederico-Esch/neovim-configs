@@ -1,7 +1,7 @@
 require('onedark').setup { style = 'deep' }
 
 require('tokyodark').setup({
-    transparent_background = false,
+    transparent_background = vim.g.transparent_enabled,
     gamma = 0.8,
     styles = {
         comments = { bold = false, italic = true },
@@ -17,7 +17,7 @@ require('bamboo').setup {
     style = 'vulgaris',
     toggle_style_key = nil,
     toggle_style_list = { 'vulgaris' },
-    transparent = false,
+    transparent = vim.g.transparent_enabled,
     dim_inactive = true,
     term_colors = true,
     ending_tildes = false,

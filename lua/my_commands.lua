@@ -13,6 +13,28 @@ vim.api.nvim_create_user_command(
 )
 
 vim.api.nvim_create_user_command(
+    "TransparentGui",
+    function(args)
+        if vim.g.neovide then
+            if vim.g.transparent_enabled then
+                vim.g.neovide_opacity = 0.75
+            else
+                vim.g.neovide_opacity = 1
+            end
+        end
+    end,
+    {nargs = 0}
+)
+
+vim.api.nvim_create_user_command(
+    "Inlay",
+    function(args)
+        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+    end,
+    {nargs = 0 }
+)
+
+vim.api.nvim_create_user_command(
     "MinGWFixCompileDB",
     function(args)
         if table.getn(vim.lsp.buf_get_clients()) == 0 then return end
