@@ -42,9 +42,9 @@ cmp.setup({
         ["<C-f>"]     = cmp.mapping.scroll_docs(-4),
         ["<C-Space>"] = cmp.mapping.complete(),
         ["<C-e>"]     = cmp.mapping.abort(),
-        --["<Tab>"]     = cmp.mapping.select_next_item(),
+        ["<Tab>"]     = cmp.mapping.confirm({ select = false }),
         --["<S-Tab>"]   = cmp.mapping.select_prev_item(),
-        ["<CR>"]      = cmp.mapping.confirm({ select = false}),
+        --["<CR>"]      = cmp.mapping.confirm({ select = false}),
     }),
     sources = cmp.config.sources(
     {
