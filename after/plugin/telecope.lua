@@ -3,7 +3,7 @@ local remap = vim.keymap.set
 local options = { silent = true, noremap = true }
 
 remap("n", "<leader>ff", builtin.find_files , options)
-remap("n", "<leader>bb", builtin.buffers    , options)
+remap("n", "<leader>bs", builtin.buffers    , options)
 remap("n", "<leader>gf", builtin.git_files  , options)
 remap("n", "<leader>ne", builtin.diagnostics, options)
 remap("n", "<leader>lg", builtin.live_grep, options)
