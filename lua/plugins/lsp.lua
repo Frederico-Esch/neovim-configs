@@ -1,3 +1,6 @@
+local os    = vim.loop.os_uname().sysname
+local remap = vim.keymap.set
+local icons = require'icons'
 
 return {
     {
@@ -7,72 +10,73 @@ return {
         end
     },
     {
+        'saghen/blink.cmp',
+        dependencies = { 'hrsh7th/vim-vsnip', 'saghen/blink.lib' },
+        build = function() require('blink.cmp').build():pwait() end,
+        opts = {
+            cmdline = { enabled = false },
+            completion = {
+                keyword = { range = 'full' },
+                accept = { auto_brackets = { enabled = false }, },
+                list = { selection = { preselect = false, auto_insert = true } },
+                menu = {
+                    auto_show = true,
+                    border = 'rounded',
+                    winhighlight = "Normal:Normal,FloatBorder:BorderBG,CursorLine:PmenuSel,Search:None",
+                    draw = {
+                        treesitter = { 'lsp' },
+                        columns = {
+                            { "kind_icon", "label" },
+                            { "kind", "label_description" },
+                        },
+                    }
+                },
+                documentation = {
+                    auto_show = true, auto_show_delay_ms = 500,
+                    window = { border = 'rounded', winhighlight = "Normal:Normal,FloatBorder:BorderBG,CursorLine:PmenuSel,Search:None", },
+                },
+                ghost_text = { enabled = true },
+            },
+            sources = {
+                default = { 'lsp', 'snippets', 'buffer', 'path' },
+            },
+            snippets = { preset = 'vsnip' }, -- 'default'
+            signature = {
+                enabled = true,
+                window = { border = 'rounded', winhighlight = "Normal:Normal,FloatBorder:BorderBG,CursorLine:PmenuSel,Search:None", }, --disable to be able to see what this is
+            },
+
+            fuzzy = { implementation = 'rust' },
+
+            keymap = {
+                preset = 'none',
+                ['<C-Space>'] = { 'show', 'show_documentation', 'hide_documentation', 'fallback' }, --Doesn't work in the microslop terminal :P
+                ['<C-d>'] = { 'show_documentation', 'hide_documentation', 'fallback' }, --fallback for my windows terminal
+                ['<C-n>'] = { 'show', 'select_next', 'fallback' },
+                ['<C-p>'] = { 'select_prev', 'fallback' },
+                ['<C-f>'] = { 'scroll_documentation_up', 'fallback' },
+                ['<C-b>'] = { 'scroll_documentation_down' },
+                ['<C-e>'] = { 'cancel', 'fallback' },
+                ['<C-s>'] = { 'show_signature', 'fallback' },
+                ['<Tab>'] = { 'accept', 'snippet_forward', 'fallback' },
+                ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
+                --Maybe I have to add 'K' to show docs | Idk if it's needed, but it's working
+            }
+        }
+    },
+    {
         'neovim/nvim-lspconfig',
         dependencies = {
-            'hrsh7th/cmp-nvim-lsp',
-            'hrsh7th/cmp-buffer',
-            'hrsh7th/cmp-vsnip',
-            'hrsh7th/vim-vsnip',
-            'hrsh7th/cmp-nvim-lsp-signature-help',
-            'hrsh7th/nvim-cmp',--TODO: try blink https://cmp.saghen.dev/configuration/general.html
-            'onsails/lspkind.nvim',
+            --'hrsh7th/cmp-nvim-lsp',
+            --'onsails/lspkind.nvim',
+            --'hrsh7th/cmp-buffer',
+            --'hrsh7th/cmp-vsnip',
+            --'hrsh7th/cmp-nvim-lsp-signature-help',
+            --'hrsh7th/nvim-cmp',--TODO: try blink https://cmp.saghen.dev/configuration/general.html
+            'saghen/blink.cmp'
         },
         config = function()
-            local cmp       = require'cmp'
             local lspconfig = vim.lsp
-            local lspkind   = require'lspkind'
-            local icons     = require'icons'
-
-            --Servers
-            local servers = {"clangd", "rust_analyzer", "hls", "gopls", "ols", "zls", "ada_ls"} --"fortls", "ccls","lua_ls",
-
-            --Setup
-            local snippet_config = { expand = function(args) vim.fn["vsnip#anonymous"](args.body) end }
-            local formatting_config = { format = lspkind.cmp_format({ mode = "symbol_text" }) }
-            local experimental_config = { ghost_text = true }
-            local os = vim.loop.os_uname().sysname
-            local remap = vim.keymap.set
-
-            --Tab fix
-            local tab_action = function()
-                if vim.fn["vsnip#jumpable"](1) == 1 then return "<plug>(vsnip-jump-next)"
-                else return "<tab>" end
-            end
-
-            local shift_tab_action = function()
-                if vim.fn["vsnip#jumpable"](-1) == 1 then return "<plug>(vsnip-jump-prev)"
-                else return "<C-h>" end
-            end
-            remap({ "i", "s" }, "<tab>", tab_action, { expr = true, remap = false })
-            remap({ "i", "s" }, "<s-tab>", shift_tab_action, { expr = true, remap = false })
-
-
-            --Attach options
-            cmp.setup({
-                snippet = snippet_config,
-                formatting = formatting_config,
-                experimental = experimental_config,
-                window = {
-                    completion = cmp.config.window.bordered({ border = 'rounded', winhighlight = "Normal:Normal,FloatBorder:BorderBG,CursorLine:PmenuSel,Search:None", }),
-                    documentation = cmp.config.window.bordered({ border = 'rounded', winhighlight = "Normal:Normal,FloatBorder:BorderBG,CursorLine:PmenuSel,Search:None",  }),
-                },
-                mapping = cmp.mapping.preset.insert({
-                    ["<C-b>"]     = cmp.mapping.scroll_docs(4),
-                    ["<C-f>"]     = cmp.mapping.scroll_docs(-4),
-                    ["<C-Space>"] = cmp.mapping.complete(),
-                    ["<C-e>"]     = cmp.mapping.abort(),
-                    ["<Tab>"]     = cmp.mapping.confirm({ select = false }),
-                    --["<S-Tab>"]   = cmp.mapping.select_prev_item(),
-                    --["<CR>"]      = cmp.mapping.confirm({ select = false}),
-                }),
-                sources = cmp.config.sources(
-                {
-                    { name = "nvim_lsp" },
-                    { name = "nvim_lsp_signature_help"},
-                    { name = "vsnip" },
-                    { name = "buffer"}
-                })
-            })
 
             --Diagnostics
             local diag_config = {
@@ -109,6 +113,8 @@ return {
             --    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = sign.name })
             --end
 
+            --Servers
+            local servers = {"clangd", "rust_analyzer", "hls", "gopls", "ols", "zls", "ada_ls"} --"fortls", "ccls","lua_ls",
             --Attaching
             for _, lsp in pairs(servers) do
 

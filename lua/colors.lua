@@ -67,7 +67,7 @@ local telescope_colors = {
 }
 
 local theme = {
-    Neovim = [[bamboo]], --dracula eva01-LCL eva01-LCL badwolf sitruuna lunaperch spacecampe industry ron carbonfox duskfox nightfox tokyodark bamboo onedark
+    Neovim = [[habamax]], --habamax dracula eva01-LCL eva01-LCL badwolf sitruuna lunaperch spacecampe industry ron carbonfox duskfox nightfox tokyodark bamboo onedark
     LuaLine = [[powerline]] --dracula palenight powerline moonfly powerline_dark palenight wombat                                   tokyodark bamboo onedark
 }
 

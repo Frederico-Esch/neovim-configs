@@ -6,7 +6,8 @@ client_capabilities.textDocument.foldingRange = {
     dynamicRegistration = false,
     lineFoldingOnly = true
 }
-local capabilities = require("cmp_nvim_lsp").default_capabilities(client_capabilities) --BETTER FOLDING
+--local capabilities = require("cmp_nvim_lsp").default_capabilities(client_capabilities) --BETTER FOLDING
+local capabilities = require("blink.cmp").get_lsp_capabilities(client_capabilities) --BETTER FOLDING
 config.capabilities = capabilities
 
 local remap = vim.keymap.set

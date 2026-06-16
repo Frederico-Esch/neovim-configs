@@ -83,6 +83,14 @@ vim.api.nvim_create_autocmd("FileType", {
     end
 })
 
+--vim.api.nvim_create_autocmd("FocusLost", {
+--    desc = "Close Lazy window in case it loses focus",
+--    group = vim.api.nvim_create_augroup("Lazy-qol", { clear = false }),
+--    callback = function(args)
+--        print("LOST FOCUS")
+--    end
+--})
+
 vim.api.nvim_create_user_command(
     "DeleteBuffer",
     function(args)
