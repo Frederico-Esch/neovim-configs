@@ -84,6 +84,30 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_user_command(
+    "DeleteBuffer",
+    function(args)
+        local bufn = vim.api.nvim_get_current_buf()
+        local windows = vim.fn.win_findbuf(bufn)
+
+        vim.tbl_map(function(window)
+            local alt_buf = vim.fn.bufnr('#')
+            if alt_buf ~= cur_buf and vim.fn.buflisted(alt_buf) == 1 then
+              vim.api.nvim_win_set_buf(window, alt_buf)
+              return
+            end
+
+            local has_previous = pcall(vim.cmd, 'bprevious')
+            if has_previous and bufn ~= vim.api.nvim_win_get_buf(window) then return end
+            local new_buf = vim.api.nvim_create_buf(true, false)
+            vim.api.nvim_win_set_buf(window, new_buf)
+        end, windows)
+
+        vim.api.nvim_buf_delete(bufn, { force = false })
+    end,
+    {nargs = 0}
+)
+
+vim.api.nvim_create_user_command(
     "CleanEspCompile",
     function(args)
         vim.cmd([[%s/\(-fno-shrink-wrap\|-fstrict-volatile-bitfields\|-fno-tree-switch-conversion\)//g]])

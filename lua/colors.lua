@@ -67,14 +67,11 @@ local telescope_colors = {
 }
 
 local theme = {
-    Neovim = [[srcery]], --dracula eva01-LCL eva01-LCL badwolf sitruuna lunaperch spacecampe industry ron carbonfox duskfox nightfox tokyodark bamboo onedark
+    Neovim = [[bamboo]], --dracula eva01-LCL eva01-LCL badwolf sitruuna lunaperch spacecampe industry ron carbonfox duskfox nightfox tokyodark bamboo onedark
     LuaLine = [[powerline]] --dracula palenight powerline moonfly powerline_dark palenight wombat                                   tokyodark bamboo onedark
 }
 
-
 --vim.opt.bg = "dark"
-vim.g["lion_squeeze_spaces"] = 1
-vim.g["srcery_italic"] = 1
 
 get_colors = function()
     return colors, telescope_colors , theme
