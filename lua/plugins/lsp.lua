@@ -1,6 +1,7 @@
 local os    = vim.loop.os_uname().sysname
 local remap = vim.keymap.set
 local icons = require'icons'
+vim.g.zig_fmt_autosave = false
 
 return {
     {
