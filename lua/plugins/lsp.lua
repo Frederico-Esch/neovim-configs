@@ -5,6 +5,11 @@ vim.g.zig_fmt_autosave = false
 
 return {
     {
+        'seblyng/roslyn.nvim',
+        opts = {
+        }
+    },
+    {
         'ziglang/zig.vim',
         config = function()
             vim.g.zig_fmt_autosave = false
