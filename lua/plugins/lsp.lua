@@ -32,8 +32,7 @@ return {
                     draw = {
                         treesitter = { 'lsp' },
                         columns = {
-                            { "kind_icon", "label" },
-                            { "kind", "label_description" },
+                            { "kind_icon", "label", "kind", "label_description", gap = 2 },
                         },
                     }
                 },
@@ -67,6 +66,9 @@ return {
                 ['<Tab>'] = { 'accept', 'snippet_forward', 'fallback' },
                 ['<S-Tab>'] = { 'snippet_backward', 'fallback' },
                 --Maybe I have to add 'K' to show docs | Idk if it's needed, but it's working
+            },
+            term = {
+                keymap = { preset = 'none' }
             }
         }
     },
@@ -120,7 +122,7 @@ return {
             --end
 
             --Servers
-            local servers = {"clangd", "rust_analyzer", "hls", "gopls", "ols", "zls", "ada_ls"} --"fortls", "ccls","lua_ls",
+            local servers = {"clangd", "rust_analyzer", "hls", "gopls", "ols", "zls", "ada_ls", "roslyn"} --"fortls", "ccls","lua_ls",
             --Attaching
             for _, lsp in pairs(servers) do
 
