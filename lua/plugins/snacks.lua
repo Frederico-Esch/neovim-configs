@@ -96,7 +96,7 @@ return {
     keys = {
         { "<leader>bs", function() Snacks.picker.buffers() end, desc = "Buffers" },
         { "<leader>lg", function() Snacks.picker.grep() end, desc = "Grep" },
-        { "<leader>ff", function() Snacks.picker.files() end, desc = "Find Files" },
+        { "<leader>ff", function() Snacks.picker.files({ ignored = true, hidden = true }) end, desc = "Find Files" },
         { "<leader>gf", function() Snacks.picker.git_files() end, desc = "Find Git Files" },
         { "<leader>gb", function() Snacks.picker.git_branches() end, desc = "Git Branches" },
         { "<leader>gd", function() Snacks.picker.git_diff() end, desc = "Git Diff (Hunks)" },
